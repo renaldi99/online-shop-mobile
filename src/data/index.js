@@ -1,1 +1,2 @@
-export * from './dummyCatalog';
+export * from './dummyCatalogs';
+export * from './dummyProducts';

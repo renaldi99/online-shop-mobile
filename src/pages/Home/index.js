@@ -1,30 +1,41 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {BannerSlider, Catalog} from '../../components/besar';
+import {BannerSlider, Catalog, ListProduct} from '../../components/besar';
 import HeaderComponent from '../../components/besar/HeaderComponent';
 import {fonts} from '../../utils';
-import {dummyCatalog} from '../../data/dummyCatalog';
+import {dummyCatalogs, dummyProducts} from '../../data';
+import {Jarak} from '../../components';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      categories: dummyCatalog,
+      categories: dummyCatalogs,
+      products: dummyProducts,
     };
   }
 
   render() {
-    const {categories} = this.state;
+    const {categories, products} = this.state;
     return (
       <View style={styles.page}>
-        <HeaderComponent />
-        <BannerSlider />
-        <View style={styles.category}>
-          <Text style={styles.label}>Select Category</Text>
-          <Catalog categories={categories} />
-        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <HeaderComponent />
+          <BannerSlider />
+          <View style={styles.category}>
+            <Text style={styles.label}>Select Category</Text>
+            <Catalog categories={categories} />
+          </View>
+          <View style={styles.product}>
+            <Text style={styles.label}>
+              <Text style={styles.boldLabel}>Find your</Text> match style
+            </Text>
+            <ListProduct products={products} />
+          </View>
+          <Jarak height={80} />
+        </ScrollView>
       </View>
     );
   }
@@ -39,5 +50,12 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.main.semibold,
     fontSize: 18,
+  },
+  product: {
+    marginHorizontal: 30,
+    marginTop: 10,
+  },
+  boldLabel: {
+    fontFamily: fonts.main.bold,
   },
 });

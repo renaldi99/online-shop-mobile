@@ -1,6 +1,6 @@
 import {Shirt, Hoodie, Jeans, Watch} from '../../assets';
 
-export const dummyCatalog = [
+export const dummyCatalogs = [
   {
     id: 1,
     nama: 'Shirt',
