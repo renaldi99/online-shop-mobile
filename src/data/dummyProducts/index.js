@@ -72,7 +72,7 @@ export const dummyProducts = [
   },
   {
     id: 5,
-    nama: 'Roughneck Black Hoodie',
+    nama: 'Roughneck Hoodie',
     gambar: Hoodie1,
     catalog: {
       id: 2,

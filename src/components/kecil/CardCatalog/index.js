@@ -15,7 +15,7 @@ export default CardCatalog;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    shadowColor: '#000',
+    shadowColor: colors.mainColor,
     shadowOffset: {
       width: 0,
       height: 2,

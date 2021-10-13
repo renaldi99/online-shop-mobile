@@ -2,17 +2,20 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 // import {Button} from '..';
 import {colors, fonts, numberWithCommas, responsiveWidth} from '../../../utils';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {heightMobileUI} from '../../../utils/constant';
 
 const CardProduct = ({product}) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.card}>
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.card}>
         <Image source={product.gambar} style={styles.imageProduct} />
-      </TouchableOpacity>
+      </View>
       <Text style={styles.text}>{product.nama}</Text>
+      <Text style={styles.harga}>Rp. {numberWithCommas(product.harga)}</Text>
 
       {/* <Button type="text" title="Detail" padding={8} /> */}
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -21,13 +24,16 @@ export default CardProduct;
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
+    backgroundColor: colors.cream,
+    padding: 10,
+    borderRadius: 10,
   },
   card: {
-    backgroundColor: colors.pink,
-    borderRadius: 10,
+    backgroundColor: colors.whiteGrey,
+    borderRadius: 8,
     width: responsiveWidth(150),
     alignItems: 'center',
-    padding: 10,
+    padding: 8,
   },
   imageProduct: {
     width: 120,
@@ -35,9 +41,14 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 10,
-    fontSize: 14,
+    fontSize: RFValue(18, heightMobileUI),
     fontFamily: fonts.main.bold,
     textTransform: 'capitalize',
-    textAlign: 'center',
+    textAlign: 'left',
+  },
+  harga: {
+    marginTop: 8,
+    fontSize: 12,
+    textAlign: 'left',
   },
 });

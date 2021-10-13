@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {BannerSlider, Catalog, ListProduct} from '../../components/besar';
+import {BannerSlider, Catalog, ListProducts} from '../../components/besar';
 import HeaderComponent from '../../components/besar/HeaderComponent';
 import {fonts} from '../../utils';
 import {dummyCatalogs, dummyProducts} from '../../data';
-import {Jarak} from '../../components';
+import {Button, Jarak} from '../../components';
 
 export default class Home extends Component {
   constructor(props) {
@@ -32,9 +32,10 @@ export default class Home extends Component {
             <Text style={styles.label}>
               <Text style={styles.boldLabel}>Find your</Text> match style
             </Text>
-            <ListProduct products={products} />
+            <ListProducts products={products} />
+            <Button title="Lihat Semua" type="text" padding={10} />
           </View>
-          <Jarak height={80} />
+          <Jarak height={100} />
         </ScrollView>
       </View>
     );
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   page: {flex: 1, backgroundColor: Colors.white},
   category: {
     marginHorizontal: 30,
-    marginTop: 10,
+    marginTop: 20,
   },
   label: {
     fontFamily: fonts.main.semibold,
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   product: {
     marginHorizontal: 30,
-    marginTop: 10,
+    marginTop: 20,
   },
   boldLabel: {
     fontFamily: fonts.main.bold,

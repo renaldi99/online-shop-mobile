@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CardProduct} from '../../kecil';
 
-const ListProduct = ({products}) => {
+const ListProducts = ({products}) => {
   return (
     <View style={styles.container}>
       {products.map(product => {
@@ -12,7 +12,7 @@ const ListProduct = ({products}) => {
   );
 };
 
-export default ListProduct;
+export default ListProducts;
 
 const styles = StyleSheet.create({
   container: {
@@ -20,6 +20,5 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingTop: 20,
-    paddingBottom: 20,
   },
 });
