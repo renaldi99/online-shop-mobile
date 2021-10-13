@@ -5,13 +5,15 @@ import {colors, fonts, numberWithCommas, responsiveWidth} from '../../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {heightMobileUI} from '../../../utils/constant';
 
-const CardProduct = ({product}) => {
+const CardProduct = ({product, navigation}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('ProductDetail', {product})}>
       <View style={styles.card}>
         <Image source={product.gambar} style={styles.imageProduct} />
       </View>
-      <Text style={styles.text}>{product.nama}</Text>
+      <Text style={styles.text}>{product.title}</Text>
       <Text style={styles.harga}>Rp. {numberWithCommas(product.harga)}</Text>
 
       {/* <Button type="text" title="Detail" padding={8} /> */}
@@ -24,12 +26,12 @@ export default CardProduct;
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    backgroundColor: colors.cream,
+    backgroundColor: colors.whiteGrey,
     padding: 10,
     borderRadius: 10,
   },
   card: {
-    backgroundColor: colors.whiteGrey,
+    backgroundColor: colors.white,
     borderRadius: 8,
     width: responsiveWidth(150),
     alignItems: 'center',

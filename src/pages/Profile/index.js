@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts, responsiveHeight} from '../../utils';
 import {dummyMenu, dummyUser} from '../../data';
 import {IconArrowLeft, IconLine, IconOption} from '../../assets';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {heightMobileUI} from '../../utils/constant';
+import {heightMobileUI} from '../../utils';
 import {ListMenu} from '../../components';
 
 export default class Profile extends Component {
@@ -19,10 +19,13 @@ export default class Profile extends Component {
 
   render() {
     const {profile, menus} = this.state;
+    const {navigation} = this.props;
     return (
       <View style={styles.page}>
         <View style={styles.navItem}>
-          <IconArrowLeft />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <IconArrowLeft />
+          </TouchableOpacity>
           <IconOption />
         </View>
         <View style={styles.container}>

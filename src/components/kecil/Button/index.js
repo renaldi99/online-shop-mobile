@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
-import {IconCart} from '../../../assets';
+import {IconArrowLeft, IconCart} from '../../../assets';
 import {colors} from '../../../utils';
 import TextOnly from './TextOnly';
 
@@ -8,6 +8,9 @@ const Button = props => {
   const Icon = () => {
     if (icon === 'cart') {
       return <IconCart />;
+    }
+    if (icon === 'arrow-left') {
+      return <IconArrowLeft />;
     }
 
     return <IconCart />;

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {BannerSlider, Catalog, ListProducts} from '../../components/besar';
+import {Catalog, ListProducts} from '../../components/besar';
 import HeaderComponent from '../../components/besar/HeaderComponent';
 import {fonts} from '../../utils';
 import {dummyCatalogs, dummyProducts} from '../../data';
-import {Button, Jarak} from '../../components';
+import {Jarak} from '../../components';
 
 export default class ListProduct extends Component {
   constructor(props) {

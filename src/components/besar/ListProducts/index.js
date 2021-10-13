@@ -2,11 +2,17 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CardProduct} from '../../kecil';
 
-const ListProducts = ({products}) => {
+const ListProducts = ({products, navigation}) => {
   return (
     <View style={styles.container}>
       {products.map(product => {
-        return <CardProduct product={product} key={product.id} />;
+        return (
+          <CardProduct
+            product={product}
+            key={product.id}
+            navigation={navigation}
+          />
+        );
       })}
     </View>
   );

@@ -12,7 +12,8 @@ import {
 export const dummyProducts = [
   {
     id: 1,
-    nama: 'Long Sleeve Black',
+    title: 'Long Sleeve Black',
+    nama: 'Long Sleeve Black Shirt Clothing | New Original',
     gambar: Shirt1,
     catalog: {
       id: 1,
@@ -27,7 +28,8 @@ export const dummyProducts = [
   },
   {
     id: 2,
-    nama: 'Red Henley SC',
+    title: 'Red Henley SC',
+    nama: 'Red Henley SC Polo Shirt | Man',
     gambar: Shirt2,
     catalog: {
       id: 1,
@@ -42,7 +44,8 @@ export const dummyProducts = [
   },
   {
     id: 3,
-    nama: 'Shirt Short Neck',
+    title: 'Shirt Short Neck',
+    nama: 'Polo Shirt Short Neck Black - Cotton',
     gambar: Shirt3,
     catalog: {
       id: 1,
@@ -57,7 +60,8 @@ export const dummyProducts = [
   },
   {
     id: 4,
-    nama: 'Red Polo Crew',
+    title: 'Red Polo Distro',
+    nama: 'Red Polo Shirt Crew Distro',
     gambar: Shirt4,
     catalog: {
       id: 1,
@@ -72,7 +76,8 @@ export const dummyProducts = [
   },
   {
     id: 5,
-    nama: 'Roughneck Hoodie',
+    title: 'Roughneck Hoodie',
+    nama: 'Roughneck Pullover Hoodie Jacket',
     gambar: Hoodie1,
     catalog: {
       id: 2,
@@ -87,7 +92,8 @@ export const dummyProducts = [
   },
   {
     id: 6,
-    nama: 'Bluuza Hoodie',
+    title: 'Bluuza Hoodie',
+    nama: 'Bluuza Hoodie FullZip Distro',
     gambar: Hoodie2,
     catalog: {
       id: 2,

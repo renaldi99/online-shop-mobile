@@ -19,6 +19,7 @@ export default class Home extends Component {
 
   render() {
     const {categories, products} = this.state;
+    const {navigation} = this.props;
     return (
       <View style={styles.page}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -32,7 +33,7 @@ export default class Home extends Component {
             <Text style={styles.label}>
               <Text style={styles.boldLabel}>Find your</Text> match style
             </Text>
-            <ListProducts products={products} />
+            <ListProducts products={products} navigation={navigation} />
             <Button title="Lihat Semua" type="text" padding={10} />
           </View>
           <Jarak height={100} />
