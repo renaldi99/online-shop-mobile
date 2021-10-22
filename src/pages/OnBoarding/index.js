@@ -81,6 +81,7 @@ export default class OnBoarding extends Component {
             renderPrevButton={this.renderPrevButton}
             renderDoneButton={this.renderDoneButton}
             onDone={this.onDone}
+            activeDotStyle={styles.dotStyle}
           />
         </View>
       );
@@ -111,12 +112,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.main.bold,
     fontSize: RFValue(20),
     textAlign: 'center',
+    color: colors.mainColor,
   },
   sectionText: {
-    marginTop: 33,
+    marginTop: 28,
     fontFamily: fonts.main.regular,
     fontSize: RFValue(14),
     textAlign: 'center',
+    color: colors.mainColor,
   },
   rightTextWrapper: {
     width: 42,
@@ -128,6 +131,7 @@ const styles = StyleSheet.create({
   rightText: {
     fontFamily: fonts.main.semibold,
     fontSize: RFValue(14),
+    color: colors.mainColor,
   },
   leftTextWrapper: {
     width: 40,
@@ -139,6 +143,7 @@ const styles = StyleSheet.create({
   leftText: {
     fontFamily: fonts.main.semibold,
     fontSize: RFValue(14),
+    color: colors.mainColor,
   },
   doneButtonWrapper: {
     flex: 1,
@@ -153,5 +158,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: colors.white,
+  },
+  dotStyle: {
+    width: 18,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: colors.mainColor,
   },
 });

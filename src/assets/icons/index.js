@@ -14,6 +14,7 @@ import IconArrowRight from './icon-arrow-right.svg';
 import IconLine from './icon-line.svg';
 import IconArrowLeft from './icon-arrow-left.svg';
 import IconOption from './icon-option.svg';
+import IconClose from './icon-close.svg';
 
 export {
   IconHomeActive,
@@ -32,4 +33,5 @@ export {
   IconLine,
   IconArrowLeft,
   IconOption,
+  IconClose,
 };
