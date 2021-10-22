@@ -1,7 +1,14 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Splash, ListProduct, Profile, ProductDetail} from '../pages';
+import {
+  Home,
+  Splash,
+  ListProduct,
+  Profile,
+  ProductDetail,
+  OnBoarding,
+} from '../pages';
 import {BottomNavigator} from '../components';
 
 const Stack = createNativeStackNavigator();
@@ -41,6 +48,11 @@ const Router = () => {
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="OnBoarding"
+        component={OnBoarding}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

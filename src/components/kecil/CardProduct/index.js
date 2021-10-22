@@ -11,7 +11,7 @@ const CardProduct = ({product, navigation}) => {
       style={styles.container}
       onPress={() => navigation.navigate('ProductDetail', {product})}>
       <View style={styles.card}>
-        <Image source={product.gambar} style={styles.imageProduct} />
+        <Image source={product.gambar[0]} style={styles.imageProduct} />
       </View>
       <Text style={styles.text}>{product.title}</Text>
       <Text style={styles.harga}>Rp. {numberWithCommas(product.harga)}</Text>

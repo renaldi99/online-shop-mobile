@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Image} from 'react-native';
-import {colors, fonts, numberWithCommas, responsiveHeight} from '../../utils';
+import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {
+  colors,
+  fonts,
+  numberWithCommas,
+  responsiveHeight,
+  responsiveWidth,
+} from '../../utils';
 import {IconArrowLeft} from '../../assets';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {heightMobileUI} from '../../utils';
+import {Button, Inputan, Jarak, Pilihan, ProductSlider} from '../../components';
 
 export default class ProductDetail extends Component {
   constructor(props) {
@@ -26,9 +33,7 @@ export default class ProductDetail extends Component {
           onPress={() => navigation.goBack()}>
           <IconArrowLeft />
         </TouchableOpacity>
-        <View style={styles.imageContainer}>
-          <Image style={styles.imageProduct} source={product.gambar} />
-        </View>
+        <ProductSlider images={images} />
         <View style={styles.container}>
           <View style={styles.sectionDetail}>
             <Text style={styles.harga}>
@@ -41,6 +46,37 @@ export default class ProductDetail extends Component {
               <Text style={styles.contentType}>Type: {product.jenis}</Text>
               <Text style={styles.contentType}>Weight: {product.berat} Kg</Text>
             </View>
+
+            <View style={styles.wrapperInput}>
+              <Inputan
+                label="Quantity"
+                width={responsiveWidth(170)}
+                height={responsiveHeight(38)}
+                fontSize={RFValue(20, heightMobileUI)}
+              />
+              <Pilihan
+                label="Size"
+                width={responsiveWidth(170)}
+                height={responsiveHeight(38)}
+                fontSize={RFValue(20, heightMobileUI)}
+                sizes={product.ukuran}
+              />
+            </View>
+            <Inputan
+              textarea
+              label="Description"
+              fontSize={RFValue(20, heightMobileUI)}
+              placeholder="Drop your description here ..."
+            />
+
+            <Jarak height={5} />
+            <Button
+              title="Add to Cart"
+              type="text"
+              padding={responsiveHeight(15)}
+              fontSize={15}
+              // onPress={() => navigation.navigate('Profile')}
+            />
           </View>
         </View>
       </View>
@@ -54,25 +90,23 @@ const styles = StyleSheet.create({
     backgroundColor: colors.pink,
   },
   navItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingHorizontal: 30,
     paddingVertical: 30,
-  },
-  imageContainer: {
-    alignItems: 'center',
+    position: 'absolute',
+    zIndex: 1,
   },
   container: {
     position: 'absolute',
     bottom: 0,
-    height: responsiveHeight(490),
+    height: responsiveHeight(460),
     width: '100%',
     backgroundColor: colors.white,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
+    zIndex: 2,
   },
   sectionDetail: {
-    marginTop: 30,
+    marginTop: 20,
     marginHorizontal: 30,
   },
   harga: {
@@ -87,7 +121,8 @@ const styles = StyleSheet.create({
   },
   line: {
     borderWidth: 0.2,
-    marginVertical: 20,
+    marginTop: 20,
+    marginBottom: 10,
   },
   wrapperType: {
     flexDirection: 'row',
@@ -96,5 +131,9 @@ const styles = StyleSheet.create({
   contentType: {
     fontSize: RFValue(20, heightMobileUI),
     fontFamily: fonts.main.regular,
+  },
+  wrapperInput: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

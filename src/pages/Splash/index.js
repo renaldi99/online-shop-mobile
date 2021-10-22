@@ -7,7 +7,7 @@ export default class Splash extends Component {
   // Set Timer Splash Screen
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.replace('MainApp');
+      this.props.navigation.replace('OnBoarding');
     }, 3000);
   }
 

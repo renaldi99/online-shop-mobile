@@ -7,6 +7,9 @@ import {
   Hoodie2,
   Shirt,
   Hoodie,
+  Hoodie1Back,
+  Shirt3Back,
+  Hoodie1ex,
 } from '../../assets';
 
 export const dummyProducts = [
@@ -14,7 +17,7 @@ export const dummyProducts = [
     id: 1,
     title: 'Long Sleeve Black',
     nama: 'Long Sleeve Black Shirt Clothing | New Original',
-    gambar: Shirt1,
+    gambar: [Shirt1],
     catalog: {
       id: 1,
       nama: 'Shirt',
@@ -30,7 +33,7 @@ export const dummyProducts = [
     id: 2,
     title: 'Red Henley SC',
     nama: 'Red Henley SC Polo Shirt | Man',
-    gambar: Shirt2,
+    gambar: [Shirt2],
     catalog: {
       id: 1,
       nama: 'Shirt',
@@ -46,7 +49,7 @@ export const dummyProducts = [
     id: 3,
     title: 'Shirt Short Neck',
     nama: 'Polo Shirt Short Neck Black - Cotton',
-    gambar: Shirt3,
+    gambar: [Shirt3, Shirt3Back],
     catalog: {
       id: 1,
       nama: 'Shirt',
@@ -62,7 +65,7 @@ export const dummyProducts = [
     id: 4,
     title: 'Red Polo Distro',
     nama: 'Red Polo Shirt Crew Distro',
-    gambar: Shirt4,
+    gambar: [Shirt4],
     catalog: {
       id: 1,
       nama: 'Shirt',
@@ -78,7 +81,7 @@ export const dummyProducts = [
     id: 5,
     title: 'Roughneck Hoodie',
     nama: 'Roughneck Pullover Hoodie Jacket',
-    gambar: Hoodie1,
+    gambar: [Hoodie1, Hoodie1ex],
     catalog: {
       id: 2,
       nama: 'Hoodie',
@@ -94,7 +97,7 @@ export const dummyProducts = [
     id: 6,
     title: 'Bluuza Hoodie',
     nama: 'Bluuza Hoodie FullZip Distro',
-    gambar: Hoodie2,
+    gambar: [Hoodie2],
     catalog: {
       id: 2,
       nama: 'Hoodie',
