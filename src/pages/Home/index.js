@@ -23,7 +23,7 @@ export default class Home extends Component {
     return (
       <View style={styles.page}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <HeaderComponent />
+          <HeaderComponent navigation={navigation} />
           <BannerSlider />
           <View style={styles.category}>
             <Text style={styles.label}>Select Category</Text>

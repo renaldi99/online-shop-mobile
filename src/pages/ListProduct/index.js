@@ -19,9 +19,10 @@ export default class ListProduct extends Component {
 
   render() {
     const {categories, products} = this.state;
+    const {navigation} = this.props;
     return (
       <View style={styles.page}>
-        <HeaderComponent />
+        <HeaderComponent navigation={navigation} />
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.category}>
             <Catalog categories={categories} />

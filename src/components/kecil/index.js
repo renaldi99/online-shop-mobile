@@ -5,5 +5,15 @@ import CardProduct from './CardProduct';
 import CardMenu from './CardMenu';
 import Inputan from './Inputan';
 import Pilihan from './Pilihan';
+import CardKeranjang from './CardKeranjang';
 
-export {Button, Jarak, CardCatalog, CardProduct, CardMenu, Inputan, Pilihan};
+export {
+  Button,
+  Jarak,
+  CardCatalog,
+  CardProduct,
+  CardMenu,
+  Inputan,
+  Pilihan,
+  CardKeranjang,
+};

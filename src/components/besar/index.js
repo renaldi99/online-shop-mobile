@@ -5,6 +5,7 @@ import Catalog from './Catalog';
 import ListProducts from './ListProducts';
 import ListMenu from './ListMenu';
 import ProductSlider from './ProductSlider';
+import ListKeranjang from './ListKeranjang';
 
 export {
   BottomNavigator,
@@ -14,4 +15,5 @@ export {
   ListProducts,
   ListMenu,
   ProductSlider,
+  ListKeranjang,
 };

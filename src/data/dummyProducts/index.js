@@ -7,7 +7,6 @@ import {
   Hoodie2,
   Shirt,
   Hoodie,
-  Hoodie1Back,
   Shirt3Back,
   Hoodie1ex,
 } from '../../assets';

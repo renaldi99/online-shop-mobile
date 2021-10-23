@@ -16,14 +16,14 @@ const Button = props => {
     return <IconCart />;
   };
 
-  const {icon, totalCart, padding, type} = props;
+  const {icon, totalCart, padding, type, onPress} = props;
 
   if (type === 'text') {
     return <TextOnly {...props} />;
   }
 
   return (
-    <TouchableOpacity style={styles.container(padding)}>
+    <TouchableOpacity style={styles.container(padding)} onPress={onPress}>
       <Icon />
       {totalCart && (
         <View style={styles.notif}>

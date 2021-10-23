@@ -8,6 +8,7 @@ import {
   Profile,
   ProductDetail,
   OnBoarding,
+  Keranjang,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -54,6 +55,14 @@ const Router = () => {
         name="OnBoarding"
         component={OnBoarding}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Keranjang"
+        component={Keranjang}
+        options={{
+          title: 'Cart',
+          headerTitleAlign: 'center',
+        }}
       />
     </Stack.Navigator>
   );

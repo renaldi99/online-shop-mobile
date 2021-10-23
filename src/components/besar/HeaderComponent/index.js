@@ -6,6 +6,7 @@ import {Button, Jarak} from '../../kecil';
 
 export default class HeaderComponent extends Component {
   render() {
+    const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.wrapperHeader}>
@@ -20,7 +21,11 @@ export default class HeaderComponent extends Component {
 
           <Jarak width={10} />
           {/* Button Cart */}
-          <Button icon="cart" padding={10} />
+          <Button
+            icon="cart"
+            padding={10}
+            onPress={() => navigation.navigate('Keranjang')}
+          />
         </View>
       </View>
     );

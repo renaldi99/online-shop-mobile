@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, StatusBar, Image} from 'react-native';
+import {Text, StyleSheet, View, Image} from 'react-native';
 import {dummyOnboards} from '../../data';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import {colors, fonts, responsiveHeight, responsiveWidth} from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
 import LinearGradient from 'react-native-linear-gradient';
-import Home from '../Home';
 
 export default class OnBoarding extends Component {
   constructor(props) {
@@ -58,34 +57,24 @@ export default class OnBoarding extends Component {
     );
   };
 
-  onDone = () => {
-    this.setState({
-      showRealApp: true,
-    });
-  };
-
   render() {
-    const {slides, showRealApp} = this.state;
-    if (showRealApp) {
-      return <Home />;
-    } else {
-      return (
-        <View style={styles.container}>
-          <StatusBar translucent backgroundColor="transparent" />
-          <AppIntroSlider
-            keyExtractor={this.keyExtractor}
-            renderItem={this.renderItem}
-            data={slides}
-            showPrevButton={true}
-            renderNextButton={this.renderNextButton}
-            renderPrevButton={this.renderPrevButton}
-            renderDoneButton={this.renderDoneButton}
-            onDone={this.onDone}
-            activeDotStyle={styles.dotStyle}
-          />
-        </View>
-      );
-    }
+    const {slides} = this.state;
+    const {navigation} = this.props;
+    return (
+      <View style={styles.container}>
+        <AppIntroSlider
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+          data={slides}
+          showPrevButton={true}
+          renderNextButton={this.renderNextButton}
+          renderPrevButton={this.renderPrevButton}
+          renderDoneButton={this.renderDoneButton}
+          onDone={() => navigation.navigate('MainApp')}
+          activeDotStyle={styles.dotStyle}
+        />
+      </View>
+    );
   }
 }
 
