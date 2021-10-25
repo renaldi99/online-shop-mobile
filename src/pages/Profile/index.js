@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {colors, fonts, responsiveHeight} from '../../utils';
 import {dummyMenu, dummyUser} from '../../data';
-import {IconArrowLeft, IconLine, IconOption} from '../../assets';
+import {IconLine, IconOption} from '../../assets';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {heightMobileUI} from '../../utils';
-import {ListMenu} from '../../components';
+import {Button, ListMenu} from '../../components';
 
 export default class Profile extends Component {
   constructor(props) {
@@ -23,9 +23,11 @@ export default class Profile extends Component {
     return (
       <View style={styles.page}>
         <View style={styles.navItem}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <IconArrowLeft />
-          </TouchableOpacity>
+          <Button
+            icon="arrow-left"
+            padding={10}
+            onPress={() => navigation.goBack()}
+          />
           <IconOption />
         </View>
         <View style={styles.container}>
@@ -66,8 +68,8 @@ const styles = StyleSheet.create({
     height: responsiveHeight(700),
     width: '100%',
     backgroundColor: colors.white,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
   },
   imageUser: {
     // responsiive not declared yet

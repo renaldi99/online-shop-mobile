@@ -44,4 +44,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: colors.secondGrey,
   },
+  pickerItem: {},
 });

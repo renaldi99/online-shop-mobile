@@ -1,7 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {IconClose} from '../../../assets';
+import {Jarak} from '..';
+import {IconDelete} from '../../../assets';
 import {
   colors,
   fonts,
@@ -19,15 +20,16 @@ const CardKeranjang = ({cart}) => {
         <Text style={styles.textPrice}>
           Rp. {numberWithCommas(cart.product.harga)}
         </Text>
+        <Jarak height={20} />
         <Text style={styles.text}>Order: {cart.jumlahPesan}</Text>
         <Text style={styles.text}>Size: {cart.ukuran}</Text>
         <Text style={styles.text}>
           Total: Rp. {numberWithCommas(cart.totalHarga)}
         </Text>
       </View>
-      <View style={styles.sectionIcon}>
-        <IconClose />
-      </View>
+      <TouchableOpacity style={styles.sectionIcon}>
+        <IconDelete />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -48,10 +50,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     marginHorizontal: 30,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: 'center',
     paddingVertical: 20,
     paddingHorizontal: 15,
+    overflow: 'hidden',
   },
   sectionImage: {
     width: responsiveWidth(88),
@@ -70,6 +73,13 @@ const styles = StyleSheet.create({
   },
   sectionIcon: {
     flex: 1,
-    alignItems: 'flex-end',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    backgroundColor: colors.danger,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

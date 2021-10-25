@@ -6,6 +6,7 @@ import HeaderComponent from '../../components/besar/HeaderComponent';
 import {fonts} from '../../utils';
 import {dummyCatalogs, dummyProducts} from '../../data';
 import {Button, Jarak} from '../../components';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 export default class Home extends Component {
   constructor(props) {
@@ -30,9 +31,7 @@ export default class Home extends Component {
             <Catalog categories={categories} />
           </View>
           <View style={styles.product}>
-            <Text style={styles.label}>
-              <Text style={styles.boldLabel}>Find your</Text> match style
-            </Text>
+            <Text style={styles.labelProduct}>The Best Product Today</Text>
             <ListProducts products={products} navigation={navigation} />
             <Button title="Lihat Semua" type="text" padding={10} />
           </View>
@@ -50,14 +49,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   label: {
-    fontFamily: fonts.main.semibold,
+    fontFamily: fonts.main.bold,
     fontSize: 18,
   },
   product: {
     marginHorizontal: 30,
     marginTop: 20,
   },
-  boldLabel: {
+  labelProduct: {
     fontFamily: fonts.main.bold,
+    fontSize: RFValue(20),
   },
 });

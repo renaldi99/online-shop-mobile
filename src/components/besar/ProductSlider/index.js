@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Modal, StyleSheet, View} from 'react-native';
+import {Modal, StyleSheet, View} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import {SliderBox} from 'react-native-image-slider-box';
 import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   },
   product: {
     width: responsiveWidth(280),
+    resizeMode: 'contain',
   },
   dotStyle: {
     marginTop: -70,

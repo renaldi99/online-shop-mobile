@@ -2,14 +2,14 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {IconArrowLeft, IconCart} from '../../../assets';
 import {colors} from '../../../utils';
+import TextIcon from './TextIcon';
 import TextOnly from './TextOnly';
 
 const Button = props => {
   const Icon = () => {
     if (icon === 'cart') {
       return <IconCart />;
-    }
-    if (icon === 'arrow-left') {
+    } else if (icon === 'arrow-left') {
       return <IconArrowLeft />;
     }
 
@@ -20,6 +20,8 @@ const Button = props => {
 
   if (type === 'text') {
     return <TextOnly {...props} />;
+  } else if (type === 'textIcon') {
+    return <TextIcon {...props} />;
   }
 
   return (
@@ -39,7 +41,7 @@ export default Button;
 const styles = StyleSheet.create({
   container: padding => ({
     backgroundColor: colors.white,
-    padding: padding,
+    padding: padding ? padding : 10,
     borderRadius: 5,
   }),
   notif: {

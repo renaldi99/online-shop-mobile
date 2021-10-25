@@ -31,7 +31,7 @@ export default class ListProduct extends Component {
             <Text style={styles.label}>
               <Text style={styles.boldLabel}>All our products</Text>
             </Text>
-            <ListProducts products={products} />
+            <ListProducts navigation={navigation} products={products} />
           </View>
           <Jarak height={100} />
         </ScrollView>

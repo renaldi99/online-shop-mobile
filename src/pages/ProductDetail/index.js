@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {
   colors,
   fonts,
@@ -7,10 +7,10 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from '../../utils';
-import {IconArrowLeft} from '../../assets';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {heightMobileUI} from '../../utils';
 import {Button, Inputan, Jarak, Pilihan, ProductSlider} from '../../components';
+import {IconFavorite} from '../../assets';
 
 export default class ProductDetail extends Component {
   constructor(props) {
@@ -28,17 +28,24 @@ export default class ProductDetail extends Component {
     // console.log('parameter : ', this.props.route.params);
     return (
       <View style={styles.page}>
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => navigation.goBack()}>
-          <IconArrowLeft />
-        </TouchableOpacity>
+        <View style={styles.navItem}>
+          <Button
+            icon="arrow-left"
+            padding={10}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
         <ProductSlider images={images} />
         <View style={styles.container}>
           <View style={styles.sectionDetail}>
-            <Text style={styles.harga}>
-              Rp. {numberWithCommas(product.harga)}
-            </Text>
+            <View style={styles.sectionTitle}>
+              <Text style={styles.harga}>
+                Rp. {numberWithCommas(product.harga)}
+              </Text>
+              <TouchableOpacity>
+                <IconFavorite />
+              </TouchableOpacity>
+            </View>
             <Text style={styles.nama}>{product.nama}</Text>
 
             <View style={styles.line} />
@@ -72,7 +79,8 @@ export default class ProductDetail extends Component {
             <Jarak height={5} />
             <Button
               title="Add to Cart"
-              type="text"
+              icon="cart-white"
+              type="textIcon"
               padding={responsiveHeight(15)}
               fontSize={15}
               // onPress={() => navigation.navigate('Profile')}
@@ -101,13 +109,17 @@ const styles = StyleSheet.create({
     height: responsiveHeight(460),
     width: '100%',
     backgroundColor: colors.white,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     zIndex: 2,
   },
   sectionDetail: {
     marginTop: 20,
     marginHorizontal: 30,
+  },
+  sectionTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   harga: {
     fontSize: RFValue(28, heightMobileUI),

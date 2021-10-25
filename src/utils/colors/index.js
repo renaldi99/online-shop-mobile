@@ -6,5 +6,6 @@ export const colors = {
   grey: '#CACACA',
   secondGrey: '#C4C4C4',
   pink: '#FAD4BF',
+  danger: '#eb4d4b',
   cream: '#FFF3ED',
 };
