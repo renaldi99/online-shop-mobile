@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import ListKeranjang from '../../components/besar/ListKeranjang';
-import {Button} from '../../components/kecil';
+import {Button, ListKeranjang} from '../../components';
 import {dummyOrders} from '../../data';
 import {colors, fonts, numberWithCommas, responsiveHeight} from '../../utils';
 
@@ -17,13 +16,14 @@ export default class Keranjang extends Component {
 
   render() {
     const {carts} = this.state;
+    const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <ListKeranjang carts={carts.orders} />
         <View style={styles.sectionFooter}>
           <View style={styles.sectionTotal}>
-            <Text style={styles.sectionText}>Total </Text>
-            <Text style={styles.sectionText}>
+            <Text style={styles.sectionText}>Total Product</Text>
+            <Text style={styles.sectionTotalHarga}>
               Rp : {numberWithCommas(carts.totalHarga)}
             </Text>
           </View>
@@ -34,6 +34,7 @@ export default class Keranjang extends Component {
             title="Checkout"
             padding={responsiveHeight(20)}
             fontSize={18}
+            onPress={() => navigation.navigate('Checkout')}
           />
         </View>
       </View>
@@ -58,5 +59,11 @@ const styles = StyleSheet.create({
   sectionText: {
     fontFamily: fonts.main.bold,
     fontSize: RFValue(20),
+    color: colors.thirdGrey,
+  },
+  sectionTotalHarga: {
+    fontFamily: fonts.main.bold,
+    fontSize: RFValue(20),
+    color: colors.orange,
   },
 });

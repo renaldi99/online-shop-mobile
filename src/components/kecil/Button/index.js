@@ -46,11 +46,13 @@ const styles = StyleSheet.create({
   }),
   notif: {
     position: 'absolute',
-    top: 4,
-    right: 4,
-    backgroundColor: colors.secondColor,
+    top: 10,
+    right: 8,
+    backgroundColor: colors.danger,
     padding: 4,
-    textAlign: 'center',
+    height: 12,
+    width: 12,
+    borderRadius: 100,
   },
   textNotif: {
     fontSize: 10,

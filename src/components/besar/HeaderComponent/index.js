@@ -25,6 +25,7 @@ export default class HeaderComponent extends Component {
             icon="cart"
             padding={10}
             onPress={() => navigation.navigate('Keranjang')}
+            totalCart
           />
         </View>
       </View>

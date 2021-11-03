@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {Jarak} from '..';
+import Jarak from '../Jarak';
 import {IconDelete} from '../../../assets';
 import {
   colors,
@@ -41,14 +41,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 18,
     backgroundColor: colors.white,
-    shadowColor: colors.mainColor,
+    shadowColor: colors.shadowColor,
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 13,
     marginHorizontal: 30,
     borderRadius: 10,
     alignItems: 'center',

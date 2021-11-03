@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
-import {Jarak} from '..';
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import Jarak from '../Jarak';
 import {
   IconArrowLeft,
   IconArrowRightWhite,
@@ -20,7 +20,7 @@ const TextIcon = ({icon, padding, fontSize, title, onPress}) => {
     } else if (icon === 'arrow-right-white') {
       return <IconArrowRightWhite />;
     }
-    return <IconCart />;
+    return null;
   };
 
   return (

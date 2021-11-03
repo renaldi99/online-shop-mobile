@@ -66,7 +66,7 @@ export default class ProductDetail extends Component {
                 width={responsiveWidth(170)}
                 height={responsiveHeight(38)}
                 fontSize={RFValue(20, heightMobileUI)}
-                sizes={product.ukuran}
+                datas={product.ukuran}
               />
             </View>
             <Inputan
@@ -79,7 +79,6 @@ export default class ProductDetail extends Component {
             <Jarak height={5} />
             <Button
               title="Add to Cart"
-              icon="cart-white"
               type="textIcon"
               padding={responsiveHeight(15)}
               fontSize={15}

@@ -5,6 +5,7 @@ import Profile from './Profile';
 import ProductDetail from './ProductDetail';
 import OnBoarding from './OnBoarding';
 import Keranjang from './Keranjang';
+import Checkout from './Checkout';
 
 export {
   Home,
@@ -14,4 +15,5 @@ export {
   ProductDetail,
   OnBoarding,
   Keranjang,
+  Checkout,
 };

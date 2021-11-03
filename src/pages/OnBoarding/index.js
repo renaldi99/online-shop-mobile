@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     color: colors.mainColor,
   },
   leftTextWrapper: {
-    width: 40,
-    height: 40,
+    width: 42,
+    height: 42,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 20,

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import {colors, fonts} from '../../../utils';
+import {colors, fonts, responsiveHeight} from '../../../utils';
 
-const Pilihan = ({label, sizes, width, height, fontSize}) => {
+const Pilihan = ({label, datas, width, height, fontSize}) => {
   const [selectedValue, setSelectedValue] = useState('');
 
   return (
@@ -14,8 +14,8 @@ const Pilihan = ({label, sizes, width, height, fontSize}) => {
           selectedValue={selectedValue}
           style={styles.pick(width, height, fontSize)}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-          {sizes.map((size, index) => (
-            <Picker.Item label={size} value={size} key={index} />
+          {datas.map((item, index) => (
+            <Picker.Item label={item} value={item} key={index} />
           ))}
         </Picker>
       </View>

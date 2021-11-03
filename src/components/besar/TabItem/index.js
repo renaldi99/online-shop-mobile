@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: isFocused => ({
-    color: isFocused ? colors.white : colors.secondColor,
+    color: isFocused ? colors.white : colors.light,
     fontSize: 11,
     marginTop: 4,
     fontFamily: fonts.main.reguler,

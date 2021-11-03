@@ -5,7 +5,11 @@ export const colors = {
   whiteGrey: '#F9F9F9',
   grey: '#CACACA',
   secondGrey: '#C4C4C4',
+  thirdGrey: '#9EA0A2',
   pink: '#FAD4BF',
   danger: '#eb4d4b',
   cream: '#FFF3ED',
+  light: '#E0E0E0',
+  shadowColor: '#868686',
+  orange: '#FA591D',
 };
