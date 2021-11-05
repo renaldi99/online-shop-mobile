@@ -37,8 +37,10 @@ export default class ProductSlider extends Component {
         <SliderBox
           images={images}
           circleLoop
-          sliderBoxHeight={responsiveHeight(430)}
+          sliderBoxHeight={responsiveHeight(420)}
+          // backgroundColor="red"
           ImageComponentStyle={styles.product}
+          resizeMode={'contain'}
           dotStyle={styles.dotStyle}
           dotColor={colors.mainColor}
           onCurrentImagePressed={index => this.clickPreview(index)}
@@ -60,13 +62,13 @@ export default class ProductSlider extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 0,
   },
   product: {
-    width: responsiveWidth(280),
-    resizeMode: 'contain',
+    // maxWidth: 300,
+    maxHeight: 400,
   },
   dotStyle: {
-    marginTop: -70,
+    marginTop: -40,
   },
 });

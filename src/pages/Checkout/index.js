@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {CardAlamat, Jarak, Pilihan} from '../../components';
-import {colors, fonts, numberWithCommas} from '../../utils';
+import {Button, CardAlamat, Jarak, Line, Pilihan} from '../../components';
+import {colors, fonts, numberWithCommas, responsiveHeight} from '../../utils';
 import {dummyOrders, dummyUser} from '../../data';
 
 export default class Checkout extends Component {
@@ -23,13 +23,54 @@ export default class Checkout extends Component {
         <View style={styles.sectionCheckout}>
           <Text style={styles.sectionAddressTitle}>Shipping Address</Text>
           <CardAlamat dataUser={dataUser} />
-          <Jarak height={30} />
+          <Jarak height={8} />
 
           <Pilihan
             datas={ekspedisi}
             label="Choose Courier"
             fontSize={RFValue(18)}
             height={48}
+          />
+
+          <Jarak height={18} />
+          <Line borderWidth={0.3} />
+          <Text style={styles.sectionTitleOrder}>Order Summary</Text>
+
+          <View style={styles.sectionDetailOrder}>
+            <Text style={styles.sectionTextOrder}>
+              Items ({carts.orders.length})
+            </Text>
+            <Text style={styles.sectionTextOrder}>
+              Rp. {numberWithCommas(carts.totalHarga)}
+            </Text>
+          </View>
+          <View style={styles.sectionDetailOrder}>
+            <Text style={styles.sectionTextOrder}>Weight ({carts.berat})</Text>
+            <Text style={styles.sectionTextOrder}>
+              Rp. {numberWithCommas(15000)}
+            </Text>
+          </View>
+          <View style={styles.sectionDetailOrder}>
+            <Text style={styles.sectionTextOrder}>estimated time</Text>
+            <Text style={styles.sectionTextOrder}>2-3 Days</Text>
+          </View>
+        </View>
+
+        <View style={styles.sectionFooter}>
+          <View style={styles.sectionTotal}>
+            <Text style={styles.sectionText}>Total Pay</Text>
+            <Text style={styles.sectionTotalHarga}>
+              Rp : {numberWithCommas(carts.totalHarga + 15000)}
+            </Text>
+          </View>
+
+          <Button
+            icon=""
+            type="textIcon"
+            title="Process Payment"
+            padding={responsiveHeight(20)}
+            fontSize={18}
+            // onPress={() => navigation.navigate('Checkout')}
           />
         </View>
       </View>
@@ -50,6 +91,10 @@ const styles = StyleSheet.create({
     fontSize: RFValue(18),
     fontFamily: fonts.main.semibold,
   },
+  sectionFooter: {
+    marginHorizontal: 30,
+    marginBottom: 10,
+  },
   sectionTotal: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -64,5 +109,20 @@ const styles = StyleSheet.create({
     fontFamily: fonts.main.bold,
     fontSize: RFValue(20),
     color: colors.orange,
+  },
+  sectionTitleOrder: {
+    fontSize: RFValue(18),
+    fontFamily: fonts.main.semibold,
+    marginVertical: 18,
+  },
+  sectionDetailOrder: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 2,
+  },
+  sectionTextOrder: {
+    fontSize: RFValue(16),
+    color: colors.thirdGrey,
+    fontFamily: fonts.main.regular,
   },
 });

@@ -7,6 +7,7 @@ import Inputan from './Inputan';
 import Pilihan from './Pilihan';
 import CardKeranjang from './CardKeranjang';
 import CardAlamat from './CardAlamat';
+import Line from './Line';
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   Pilihan,
   CardKeranjang,
   CardAlamat,
+  Line,
 };
