@@ -31,7 +31,7 @@ export default class Home extends Component {
             <Catalog categories={categories} />
           </View>
           <View style={styles.product}>
-            <Text style={styles.labelProduct}>The Best Product Today</Text>
+            <Text style={styles.labelProduct}>The Best Product Today ✨</Text>
             <ListProducts products={products} navigation={navigation} />
             <Button title="Lihat Semua" type="text" padding={10} />
           </View>

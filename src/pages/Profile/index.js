@@ -44,7 +44,7 @@ export default class Profile extends Component {
             </Text>
           </View>
 
-          <ListMenu menus={menus} />
+          <ListMenu menus={menus} navigation={navigation} />
         </View>
       </View>
     );

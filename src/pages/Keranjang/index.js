@@ -29,7 +29,7 @@ export default class Keranjang extends Component {
           </View>
 
           <Button
-            icon="arrow-right-white"
+            icon=""
             type="textIcon"
             title="Checkout"
             padding={responsiveHeight(20)}

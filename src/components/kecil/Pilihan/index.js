@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     height: height,
     fontSize: fontSize ? fontSize : 20,
     fontFamily: fonts.main.regular,
+    alignItem: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'grey',
   }),
   wrapperPicker: {
     borderWidth: 0.5,

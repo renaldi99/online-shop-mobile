@@ -6,6 +6,8 @@ import ProductDetail from './ProductDetail';
 import OnBoarding from './OnBoarding';
 import Keranjang from './Keranjang';
 import Checkout from './Checkout';
+import EditProfile from './EditProfile';
+import ChangePassword from './ChangePassword';
 
 export {
   Home,
@@ -16,4 +18,6 @@ export {
   OnBoarding,
   Keranjang,
   Checkout,
+  EditProfile,
+  ChangePassword,
 };

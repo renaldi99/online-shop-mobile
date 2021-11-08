@@ -19,6 +19,7 @@ import IconOption from './icon-option.svg';
 import IconClose from './icon-close.svg';
 import IconFavorite from './icon-fav.svg';
 import IconDelete from './icon-delete.svg';
+import IconEdit from './icon-edit-curved.svg';
 
 export {
   IconHomeActive,
@@ -42,4 +43,5 @@ export {
   IconDelete,
   IconCartWhite,
   IconArrowRightWhite,
+  IconEdit,
 };

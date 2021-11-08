@@ -16,18 +16,18 @@ export default class OnBoarding extends Component {
     };
   }
 
-  renderItem = ({item}) => {
-    return (
-      <View style={styles.wrapperSlide}>
-        <Image source={item.image} style={styles.image} />
-        <View style={styles.sectionContent}>
-          <Text style={styles.sectionTitle}>{item.title}</Text>
-          <Text style={styles.sectionText}>{item.text}</Text>
-        </View>
-      </View>
-    );
-  };
-  keyExtractor = item => item.title;
+  // renderItem = ({item}) => {
+  //   return (
+  //     <View style={styles.wrapperSlide}>
+  //       <Image source={item.image} style={styles.image} />
+  //       <View style={styles.sectionContent}>
+  //         <Text style={styles.sectionTitle}>{item.title}</Text>
+  //         <Text style={styles.sectionText}>{item.text}</Text>
+  //       </View>
+  //     </View>
+  //   );
+  // };
+  // keyExtractor = item => item.title;
 
   renderNextButton = () => {
     return (
@@ -63,8 +63,16 @@ export default class OnBoarding extends Component {
     return (
       <View style={styles.container}>
         <AppIntroSlider
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
+          keyExtractor={item => item.title}
+          renderItem={({item}) => (
+            <View style={styles.wrapperSlide}>
+              <Image source={item.image} style={styles.image} />
+              <View style={styles.sectionContent}>
+                <Text style={styles.sectionTitle}>{item.title}</Text>
+                <Text style={styles.sectionText}>{item.text}</Text>
+              </View>
+            </View>
+          )}
           data={slides}
           showPrevButton={true}
           renderNextButton={this.renderNextButton}

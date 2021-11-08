@@ -10,6 +10,8 @@ import {
   OnBoarding,
   Keranjang,
   Checkout,
+  EditProfile,
+  ChangePassword,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -70,6 +72,22 @@ const Router = () => {
         component={Checkout}
         options={{
           title: 'Checkout',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{
+          title: 'Edit Profile',
+          headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
+        options={{
+          title: 'Change Password',
           headerTitleAlign: 'center',
         }}
       />
