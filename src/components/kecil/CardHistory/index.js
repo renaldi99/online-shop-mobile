@@ -111,10 +111,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionImageOrder: {
-    width: responsiveWidth(66),
-    height: responsiveHeight(66),
-    // backgroundColor: 'grey',
-    resizeMode: 'contain',
+    width: responsiveWidth(80),
+    height: responsiveHeight(80),
+    backgroundColor: 'grey',
+    paddingVertical: 40,
+    resizeMode: 'center',
   },
   sectionDescriptionOrder: {
     marginLeft: responsiveWidth(12),
