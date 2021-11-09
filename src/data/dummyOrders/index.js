@@ -3,9 +3,9 @@ import {Shirt, Shirt1, Shirt3, Shirt3Back} from '../../assets';
 export const dummyOrders = [
   {
     id: 1,
-    tanggalPemesanan: '20-09-2021',
+    tanggalPemesanan: '20 June 2021',
     status: 'keranjang',
-    totalHarga: 236000,
+    totalHarga: 336000,
     berat: 0.75,
     orders: [
       {

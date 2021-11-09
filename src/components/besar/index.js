@@ -6,6 +6,7 @@ import ListProducts from './ListProducts';
 import ListMenu from './ListMenu';
 import ProductSlider from './ProductSlider';
 import ListKeranjang from './ListKeranjang';
+import ListHistory from './ListHistory';
 
 export {
   BottomNavigator,
@@ -16,4 +17,5 @@ export {
   ListMenu,
   ProductSlider,
   ListKeranjang,
+  ListHistory,
 };
