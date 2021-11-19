@@ -40,6 +40,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.main.regular,
     alignItem: 'center',
     justifyContent: 'center',
+    marginTop: -10,
+    marginBottom: 15,
     // backgroundColor: 'grey',
   }),
   wrapperPicker: {

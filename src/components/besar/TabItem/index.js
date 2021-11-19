@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
     color: isFocused ? colors.white : colors.light,
     fontSize: 11,
     marginTop: 4,
-    fontFamily: fonts.main.reguler,
+    fontFamily: fonts.main.regular,
   }),
 });

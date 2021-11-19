@@ -12,7 +12,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import {Button, Inputan, Pilihan} from '../../components';
 import {dummyUser} from '../../data';
-import {colors, fonts, responsiveHeight} from '../../utils';
+import {colors, fonts, responsiveHeight, responsiveWidth} from '../../utils';
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -85,10 +85,16 @@ export default class EditProfile extends Component {
           />
           <Pilihan
             fontSize={RFValue(18)}
+            height={responsiveHeight(38)}
             label="Province"
             datas={dataProvinsi}
           />
-          <Pilihan fontSize={RFValue(18)} label="City" datas={dataKota} />
+          <Pilihan
+            fontSize={RFValue(18)}
+            height={responsiveHeight(38)}
+            label="City"
+            datas={dataKota}
+          />
 
           <View style={styles.wrapperButton}>
             <Button

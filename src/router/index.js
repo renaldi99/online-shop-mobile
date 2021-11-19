@@ -13,6 +13,7 @@ import {
   EditProfile,
   ChangePassword,
   History,
+  Login,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -99,6 +100,11 @@ const Router = () => {
           title: 'History Order',
           headerTitleAlign: 'center',
         }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

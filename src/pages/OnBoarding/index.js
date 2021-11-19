@@ -16,18 +16,17 @@ export default class OnBoarding extends Component {
     };
   }
 
-  // renderItem = ({item}) => {
-  //   return (
-  //     <View style={styles.wrapperSlide}>
-  //       <Image source={item.image} style={styles.image} />
-  //       <View style={styles.sectionContent}>
-  //         <Text style={styles.sectionTitle}>{item.title}</Text>
-  //         <Text style={styles.sectionText}>{item.text}</Text>
-  //       </View>
-  //     </View>
-  //   );
-  // };
-  // keyExtractor = item => item.title;
+  viewBoard = ({item}) => {
+    return (
+      <View style={styles.wrapperSlide}>
+        <Image source={item.image} style={styles.image} />
+        <View style={styles.sectionContent}>
+          <Text style={styles.sectionTitle}>{item.title}</Text>
+          <Text style={styles.sectionText}>{item.text}</Text>
+        </View>
+      </View>
+    );
+  };
 
   renderNextButton = () => {
     return (
@@ -64,15 +63,7 @@ export default class OnBoarding extends Component {
       <View style={styles.container}>
         <AppIntroSlider
           keyExtractor={item => item.title}
-          renderItem={({item}) => (
-            <View style={styles.wrapperSlide}>
-              <Image source={item.image} style={styles.image} />
-              <View style={styles.sectionContent}>
-                <Text style={styles.sectionTitle}>{item.title}</Text>
-                <Text style={styles.sectionText}>{item.text}</Text>
-              </View>
-            </View>
-          )}
+          renderItem={({item}) => <this.viewBoard item={item} key={item.id} />}
           data={slides}
           showPrevButton={true}
           renderNextButton={this.renderNextButton}

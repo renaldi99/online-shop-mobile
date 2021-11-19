@@ -12,6 +12,8 @@ import {
 } from '../../../utils';
 
 const CardHistory = ({order}) => {
+  // console.log('ini dia: ', order.orders[0].product.nama.length);
+
   return (
     <View style={styles.containerCard}>
       <View style={styles.sectionHeader}>
@@ -35,7 +37,9 @@ const CardHistory = ({order}) => {
             />
             <View style={styles.sectionDescriptionOrder}>
               <Text style={styles.sectionDescriptionTitle}>
-                {item.product.title}
+                {item.product.nama.length > 25
+                  ? item.product.nama.substring(0, 28) + '...'
+                  : item.product.nama}
               </Text>
               <Text>Order: {item.jumlahPesan}</Text>
               <Text>Total Order: Rp. {numberWithCommas(item.totalHarga)}</Text>
@@ -54,9 +58,9 @@ const CardHistory = ({order}) => {
           </Text>
         </View>
 
-        <View style={styles.sectionFeedBack}>
+        <TouchableOpacity style={styles.sectionFeedBack}>
           <Text style={styles.sectionFeedBackText}>Feedback</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
