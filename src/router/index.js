@@ -14,6 +14,7 @@ import {
   ChangePassword,
   History,
   Login,
+  Register1,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -104,6 +105,11 @@ const Router = () => {
       <Stack.Screen
         name="Login"
         component={Login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Register1"
+        component={Register1}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
