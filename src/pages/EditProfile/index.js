@@ -86,13 +86,13 @@ export default class EditProfile extends Component {
           <Pilihan
             fontSize={RFValue(18)}
             height={responsiveHeight(38)}
-            label="Province"
+            label="Province :"
             datas={dataProvinsi}
           />
           <Pilihan
             fontSize={RFValue(18)}
             height={responsiveHeight(38)}
-            label="City"
+            label="City :"
             datas={dataKota}
           />
 

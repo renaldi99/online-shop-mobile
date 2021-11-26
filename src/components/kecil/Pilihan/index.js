@@ -3,17 +3,30 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {colors, fonts, responsiveHeight} from '../../../utils';
 
-const Pilihan = ({label, datas, width, height, fontSize}) => {
+const Pilihan = ({
+  label,
+  datas,
+  width,
+  height,
+  fontSize,
+  borderColor,
+  borderWidth,
+  labelDefault,
+}) => {
   const [selectedValue, setSelectedValue] = useState('');
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label(fontSize)}>{label} :</Text>
-      <View style={styles.wrapperPicker}>
+      <Text style={styles.label(fontSize)}>{label}</Text>
+      <View style={styles.wrapperPicker(borderColor, borderWidth)}>
         <Picker
           selectedValue={selectedValue}
           style={styles.pick(width, height, fontSize)}
           onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+          <Picker.Item
+            label={labelDefault ? labelDefault : '-- Choose --'}
+            value=""
+          />
           {datas.map((item, index) => (
             <Picker.Item label={item} value={item} key={index} />
           ))}
@@ -44,10 +57,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     // backgroundColor: 'grey',
   }),
-  wrapperPicker: {
-    borderWidth: 0.5,
+  wrapperPicker: (borderColor, borderWidth) => ({
+    borderWidth: borderWidth ? borderWidth : 0.5,
     borderRadius: 5,
-    borderColor: colors.secondGrey,
-  },
+    borderColor: borderColor ? borderColor : colors.grey,
+  }),
   pickerItem: {},
 });

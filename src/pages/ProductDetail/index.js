@@ -68,7 +68,7 @@ export default class ProductDetail extends Component {
                 fontSize={RFValue(20, heightMobileUI)}
               />
               <Pilihan
-                label="Size"
+                label="Size :"
                 width={responsiveWidth(170)}
                 height={responsiveHeight(38)}
                 fontSize={RFValue(20, heightMobileUI)}

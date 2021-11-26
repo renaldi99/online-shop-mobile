@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View, ScrollView} from 'react-native';
-import {Logo} from '../../assets';
 import {
   colors,
   fonts,
@@ -9,55 +8,67 @@ import {
   responsiveWidth,
 } from '../../utils';
 import {TextInput} from 'react-native-paper';
-import {Button, Jarak} from '../../components';
+import {Button, Jarak, Pilihan} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-export default class Register1 extends Component {
+export default class Register2 extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dataProvinsi: [],
+      dataKota: [],
+    };
+  }
+
   render() {
+    const {dataProvinsi, dataKota} = this.state;
+    const {navigation} = this.props;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.sectionText}>
           <Text style={styles.titleText}>Register ✍️</Text>
-          <Text style={styles.smallText}>
-            Create an account so you can buy our product!
-          </Text>
+          <Text style={styles.smallText}>Fill data for your address</Text>
         </View>
         <View style={styles.wrapperCircle}>
-          <View style={styles.circlePrimary} />
-          <Jarak width={10} />
           <View style={styles.circleDisable} />
+          <Jarak width={10} />
+          <View style={styles.circlePrimary} />
         </View>
         <View style={styles.sectionInput}>
           <TextInput
             mode="outlined"
-            label="Name"
-            placeholder="Input your name"
+            label="Address"
+            multiline={true}
+            numberOfLines={4}
+            placeholder="Input your address"
             right={<TextInput.Affix />}
           />
-          <Jarak height={10} />
-          <TextInput
-            mode="outlined"
-            label="Email"
-            placeholder="Input your email"
-            right={<TextInput.Affix />}
+          <Pilihan
+            fontSize={RFValue(18)}
+            height={responsiveHeight(70)}
+            borderWidth={1}
+            borderColor="#7f8c8d"
+            labelDefault="Choose Province"
+            datas={dataProvinsi}
           />
-          <Jarak height={10} />
-          <TextInput
-            mode="outlined"
-            label="Password"
-            placeholder="Input your password"
-            secureTextEntry
-            right={<TextInput.Affix />}
-          />
-          <Jarak height={10} />
-          <TextInput
-            mode="outlined"
-            label="No. Handphone"
-            placeholder="Input your number"
-            right={<TextInput.Affix />}
+          <Pilihan
+            fontSize={RFValue(18)}
+            height={responsiveHeight(70)}
+            borderWidth={1}
+            borderColor="#7f8c8d"
+            labelDefault="Choose City"
+            datas={dataKota}
           />
           <Jarak height={20} />
-          <Button type="text" title="Continue" padding={15} fontSize={18} />
+
+          <Button
+            type="text"
+            title="Submit"
+            padding={15}
+            fontSize={18}
+            onPress={() => navigation.navigate('MainApp')}
+          />
         </View>
 
         <View style={styles.sectionRegisterAccount}>

@@ -27,7 +27,7 @@ export default class Checkout extends Component {
 
           <Pilihan
             datas={ekspedisi}
-            label="Choose Courier"
+            label="Choose Courier :"
             fontSize={RFValue(18)}
             height={48}
           />

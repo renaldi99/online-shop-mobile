@@ -13,4 +13,5 @@ export const colors = {
   shadowColor: '#868686',
   orange: '#FA591D',
   green: '#3FAF48',
+  outlineBorder: '#8134F0',
 };
