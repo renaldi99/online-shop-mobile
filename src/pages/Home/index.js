@@ -8,7 +8,7 @@ import {dummyCatalogs, dummyProducts} from '../../data';
 import {Button, Jarak} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -41,6 +41,8 @@ export default class Home extends Component {
     );
   }
 }
+
+export default Home;
 
 const styles = StyleSheet.create({
   page: {flex: 1, backgroundColor: Colors.white},

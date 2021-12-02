@@ -23,6 +23,9 @@ const CardProduct = ({product, navigation}) => {
         <Text style={styles.text}>{product.title}</Text>
         <Text style={styles.harga}>Rp. {numberWithCommas(product.harga)}</Text>
       </View>
+      <View style={styles.wrapperBestProduct}>
+        <Text style={styles.textBestProduct}>Best Product</Text>
+      </View>
 
       {/* <Button type="text" title="Detail" padding={8} /> */}
     </TouchableOpacity>
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
     elevation: 8,
     minHeight: responsiveHeight(350),
     minWidth: responsiveWidth(160),
+    overflow: 'hidden',
   },
   card: {
     backgroundColor: colors.white,
@@ -73,5 +77,19 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 12,
     textAlign: 'left',
+  },
+  wrapperBestProduct: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: colors.green,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  textBestProduct: {
+    fontSize: RFValue(15, heightMobileUI),
+    fontFamily: fonts.main.regular,
+    textTransform: 'capitalize',
+    color: colors.white,
   },
 });
