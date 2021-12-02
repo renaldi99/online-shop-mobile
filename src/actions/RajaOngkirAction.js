@@ -42,7 +42,7 @@ export const getProvinceList = () => {
             type: GET_PROVINCE,
             payload: {
               loading: false,
-              data: res.data ? res.data.rajaongkir.result : [],
+              data: res.data ? res.data.rajaongkir.results : [],
               errorMessage: false,
             },
           });

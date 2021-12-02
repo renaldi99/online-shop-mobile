@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import {colors, fonts, responsiveHeight} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 
 const Pilihan = ({
   label,
@@ -12,9 +12,9 @@ const Pilihan = ({
   borderColor,
   borderWidth,
   labelDefault,
+  selectedValue,
+  onValueChange,
 }) => {
-  const [selectedValue, setSelectedValue] = useState('');
-
   return (
     <View style={styles.container}>
       <Text style={styles.label(fontSize)}>{label}</Text>
@@ -22,13 +22,17 @@ const Pilihan = ({
         <Picker
           selectedValue={selectedValue}
           style={styles.pick(width, height, fontSize)}
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+          onValueChange={onValueChange}>
           <Picker.Item
             label={labelDefault ? labelDefault : '-- Choose --'}
             value=""
           />
           {datas.map((item, index) => (
-            <Picker.Item label={item} value={item} key={index} />
+            <Picker.Item
+              label={item.province}
+              value={item.province_id}
+              key={item.province_id}
+            />
           ))}
         </Picker>
       </View>

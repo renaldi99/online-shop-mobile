@@ -10,20 +10,27 @@ import {
 import {TextInput} from 'react-native-paper';
 import {Button, Jarak, Pilihan} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {connect} from 'react-redux';
+import {getProvinceList} from '../../actions/RajaOngkirAction';
 
-export default class Register2 extends Component {
+class Register2 extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dataProvinsi: [],
+      kota: '',
+      provinsi: '',
       dataKota: [],
     };
   }
 
+  componentDidMount() {
+    this.props.dispatch(getProvinceList());
+  }
+
   render() {
-    const {dataProvinsi, dataKota} = this.state;
-    const {navigation} = this.props;
+    const {dataKota, kota, provinsi} = this.state;
+    const {navigation, getProvinceResult} = this.props;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.sectionText}>
@@ -50,7 +57,8 @@ export default class Register2 extends Component {
             borderWidth={1}
             borderColor="#7f8c8d"
             labelDefault="Choose Province"
-            datas={dataProvinsi}
+            datas={getProvinceResult ? getProvinceResult : []}
+            selectedValue={provinsi}
           />
           <Pilihan
             fontSize={RFValue(18)}
@@ -59,6 +67,7 @@ export default class Register2 extends Component {
             borderColor="#7f8c8d"
             labelDefault="Choose City"
             datas={dataKota}
+            selectedValue={kota}
           />
           <Jarak height={20} />
 
@@ -79,6 +88,12 @@ export default class Register2 extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  getProvinceResult: state.RajaOngkirReducer.getProvinceResult,
+});
+
+export default connect(mapStateToProps, null)(Register2);
 
 const styles = StyleSheet.create({
   container: {
