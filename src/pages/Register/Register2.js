@@ -11,7 +11,7 @@ import {TextInput} from 'react-native-paper';
 import {Button, Jarak, Pilihan} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
-import {getProvinceList} from '../../actions/RajaOngkirAction';
+import {getProvinceList, getCityList} from '../../actions/RajaOngkirAction';
 
 class Register2 extends Component {
   constructor(props) {
@@ -28,9 +28,17 @@ class Register2 extends Component {
     this.props.dispatch(getProvinceList());
   }
 
+  changeProvince = province => {
+    this.setState({
+      provinsi: province,
+    });
+
+    this.props.dispatch(getCityList(province));
+  };
+
   render() {
     const {dataKota, kota, provinsi} = this.state;
-    const {navigation, getProvinceResult} = this.props;
+    const {navigation, getProvinceResult, getCityResult} = this.props;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.sectionText}>
@@ -56,18 +64,20 @@ class Register2 extends Component {
             height={responsiveHeight(70)}
             borderWidth={1}
             borderColor="#7f8c8d"
-            labelDefault="Choose Province"
+            label="Province"
             datas={getProvinceResult ? getProvinceResult : []}
             selectedValue={provinsi}
+            onValueChange={province => this.changeProvince(province)}
           />
           <Pilihan
             fontSize={RFValue(18)}
             height={responsiveHeight(70)}
             borderWidth={1}
             borderColor="#7f8c8d"
-            labelDefault="Choose City"
-            datas={dataKota}
+            label="City"
+            datas={getCityResult ? getCityResult : []}
             selectedValue={kota}
+            onValueChange={city => this.setState({kota: city})}
           />
           <Jarak height={20} />
 
@@ -91,6 +101,7 @@ class Register2 extends Component {
 
 const mapStateToProps = state => ({
   getProvinceResult: state.RajaOngkirReducer.getProvinceResult,
+  getCityResult: state.RajaOngkirReducer.getCityResult,
 });
 
 export default connect(mapStateToProps, null)(Register2);

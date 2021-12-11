@@ -27,13 +27,27 @@ const Pilihan = ({
             label={labelDefault ? labelDefault : '-- Choose --'}
             value=""
           />
-          {datas.map((item, index) => (
-            <Picker.Item
-              label={item.province}
-              value={item.province_id}
-              key={item.province_id}
-            />
-          ))}
+          {datas.map((item, index) => {
+            if (label === 'Province') {
+              return (
+                <Picker.Item
+                  label={item.province}
+                  value={item.province_id}
+                  key={item.province_id}
+                />
+              );
+            } else if (label === 'City') {
+              return (
+                <Picker.Item
+                  label={item.type + ' ' + item.city_name}
+                  value={item.city_id}
+                  key={item.city_id}
+                />
+              );
+            } else {
+              return <Picker.Item label={item} value={item} key={index} />;
+            }
+          })}
         </Picker>
       </View>
     </View>
