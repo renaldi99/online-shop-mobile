@@ -11,6 +11,7 @@ const Inputan = ({
   label,
   value,
   secureTextEntry,
+  onChangeText,
 }) => {
   if (textarea) {
     return (
@@ -21,6 +22,7 @@ const Inputan = ({
           multiline={true}
           numberOfLines={3}
           value={value}
+          onChangeText={onChangeText}
         />
       </View>
     );
@@ -32,6 +34,7 @@ const Inputan = ({
         style={styles.input(width, height, fontSize)}
         value={value}
         secureTextEntry={secureTextEntry}
+        onChangeText={onChangeText}
       />
     </View>
   );

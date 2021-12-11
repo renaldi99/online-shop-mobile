@@ -10,10 +10,38 @@ import {
 import {TextInput} from 'react-native-paper';
 import {Button, Jarak} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
+import SweetAlert from 'react-native-sweet-alert';
 
 export default class Register1 extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      nama: '',
+      email: '',
+      noHp: '',
+      password: '',
+    };
+  }
+
+  checkToContinue = () => {
+    const {nama, email, noHp, password} = this.state;
     const {navigation} = this.props;
+
+    if (nama && email && noHp && password) {
+      navigation.navigate('Register2', this.state);
+    } else {
+      SweetAlert.showAlertWithOptions({
+        title: 'Opps..',
+        subTitle: 'Form cannot be empty',
+        style: 'error',
+        cancellable: true,
+      });
+    }
+  };
+
+  render() {
+    const {nama, email, noHp, password} = this.state;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.sectionText}>
@@ -32,6 +60,8 @@ export default class Register1 extends Component {
             mode="outlined"
             label="Name"
             placeholder="Input your name"
+            value={nama}
+            onChangeText={nama => this.setState({nama})}
             right={<TextInput.Affix />}
           />
           <Jarak height={10} />
@@ -39,6 +69,8 @@ export default class Register1 extends Component {
             mode="outlined"
             label="Email"
             placeholder="Input your email"
+            value={email}
+            onChangeText={email => this.setState({email})}
             right={<TextInput.Affix />}
           />
           <Jarak height={10} />
@@ -47,6 +79,8 @@ export default class Register1 extends Component {
             label="Password"
             placeholder="Input your password"
             secureTextEntry
+            value={password}
+            onChangeText={password => this.setState({password})}
             right={<TextInput.Affix />}
           />
           <Jarak height={10} />
@@ -54,6 +88,8 @@ export default class Register1 extends Component {
             mode="outlined"
             label="No. Handphone"
             placeholder="Input your number"
+            value={noHp}
+            onChangeText={noHp => this.setState({noHp})}
             right={<TextInput.Affix />}
           />
           <Jarak height={20} />
@@ -62,7 +98,7 @@ export default class Register1 extends Component {
             title="Continue"
             padding={15}
             fontSize={18}
-            onPress={() => navigation.navigate('Register2')}
+            onPress={() => this.checkToContinue()}
           />
         </View>
 

@@ -18,9 +18,9 @@ class Register2 extends Component {
     super(props);
 
     this.state = {
+      alamat: '',
       kota: '',
       provinsi: '',
-      dataKota: [],
     };
   }
 
@@ -37,7 +37,7 @@ class Register2 extends Component {
   };
 
   render() {
-    const {dataKota, kota, provinsi} = this.state;
+    const {kota, provinsi} = this.state;
     const {navigation, getProvinceResult, getCityResult} = this.props;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>

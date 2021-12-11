@@ -12,6 +12,8 @@ target 'SigitCloth' do
     :hermes_enabled => false
   )
 
+  pod 'RNSweetAlert', :path => '../node_modules/react-native-sweet-alert'
+
   target 'SigitClothTests' do
     inherit! :complete
     # Pods for testing
