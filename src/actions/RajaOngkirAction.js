@@ -1,9 +1,9 @@
+import axios from 'axios';
 import {
   API_HEADER_RAJAONGKIR,
   API_RAJAONGKIR,
   API_TIMEOUT,
 } from '../utils/constant';
-import axios from 'axios';
 
 export const GET_PROVINCE = 'GET_PROVINCE';
 export const GET_CITY = 'GET_CITY';

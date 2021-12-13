@@ -12,6 +12,7 @@ import {Button, Jarak, Pilihan} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getProvinceList, getCityList} from '../../actions/RajaOngkirAction';
+import SweetAlert from 'react-native-sweet-alert';
 
 class Register2 extends Component {
   constructor(props) {
@@ -19,8 +20,8 @@ class Register2 extends Component {
 
     this.state = {
       alamat: '',
-      kota: '',
-      provinsi: '',
+      kota: false,
+      provinsi: false,
     };
   }
 
@@ -36,9 +37,36 @@ class Register2 extends Component {
     this.props.dispatch(getCityList(province));
   };
 
+  onContinue = () => {
+    const {kota, provinsi, alamat} = this.state;
+    const {nama, email, noHp} = this.props.route.params;
+
+    if (kota && provinsi && alamat) {
+      const data = {
+        nama: nama,
+        email: email,
+        noHp: noHp,
+        alamat: alamat,
+        provinsi: provinsi,
+        kota: kota,
+        status: 'USER',
+      };
+
+      //send to auth action
+      console.log(data);
+    } else {
+      SweetAlert.showAlertWithOptions({
+        title: 'Opps..',
+        subTitle: 'Form cannot be empty',
+        style: 'error',
+        cancellable: true,
+      });
+    }
+  };
+
   render() {
-    const {kota, provinsi} = this.state;
-    const {navigation, getProvinceResult, getCityResult} = this.props;
+    const {kota, provinsi, alamat} = this.state;
+    const {getProvinceResult, getCityResult} = this.props;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.sectionText}>
@@ -57,6 +85,8 @@ class Register2 extends Component {
             multiline={true}
             numberOfLines={4}
             placeholder="Input your address"
+            onChangeText={alamat => this.setState({alamat})}
+            value={alamat}
             right={<TextInput.Affix />}
           />
           <Pilihan
@@ -86,7 +116,7 @@ class Register2 extends Component {
             title="Submit"
             padding={15}
             fontSize={18}
-            onPress={() => navigation.navigate('MainApp')}
+            onPress={() => this.onContinue()}
           />
         </View>
 
