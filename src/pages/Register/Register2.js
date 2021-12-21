@@ -13,6 +13,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getProvinceList, getCityList} from '../../actions/RajaOngkirAction';
 import SweetAlert from 'react-native-sweet-alert';
+import {registerUser} from '../../actions/AuthAction';
 
 class Register2 extends Component {
   constructor(props) {
@@ -29,6 +30,14 @@ class Register2 extends Component {
     this.props.dispatch(getProvinceList());
   }
 
+  componentDidUpdate(prevProps) {
+    const {registerResult} = this.props;
+
+    if (registerResult && prevProps.registerResult !== registerResult) {
+      this.props.navigation.replace('MainApp');
+    }
+  }
+
   changeProvince = province => {
     this.setState({
       provinsi: province,
@@ -39,7 +48,7 @@ class Register2 extends Component {
 
   onContinue = () => {
     const {kota, provinsi, alamat} = this.state;
-    const {nama, email, noHp} = this.props.route.params;
+    const {nama, email, noHp, password} = this.props.route.params;
 
     if (kota && provinsi && alamat) {
       const data = {
@@ -53,7 +62,7 @@ class Register2 extends Component {
       };
 
       //send to auth action
-      console.log(data);
+      this.props.dispatch(registerUser(data, password));
     } else {
       SweetAlert.showAlertWithOptions({
         title: 'Opps..',
@@ -66,7 +75,7 @@ class Register2 extends Component {
 
   render() {
     const {kota, provinsi, alamat} = this.state;
-    const {getProvinceResult, getCityResult} = this.props;
+    const {getProvinceResult, getCityResult, registerLoading} = this.props;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.sectionText}>
@@ -117,6 +126,7 @@ class Register2 extends Component {
             padding={15}
             fontSize={18}
             onPress={() => this.onContinue()}
+            loading={registerLoading}
           />
         </View>
 
@@ -132,6 +142,10 @@ class Register2 extends Component {
 const mapStateToProps = state => ({
   getProvinceResult: state.RajaOngkirReducer.getProvinceResult,
   getCityResult: state.RajaOngkirReducer.getCityResult,
+
+  registerLoading: state.AuthReducer.registerLoading,
+  registerResult: state.AuthReducer.registerResult,
+  registerError: state.AuthReducer.registerError,
 });
 
 export default connect(mapStateToProps, null)(Register2);

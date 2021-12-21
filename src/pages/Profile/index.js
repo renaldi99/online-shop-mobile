@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import {colors, fonts, responsiveHeight} from '../../utils';
-import {dummyMenu, dummyUser} from '../../data';
-import {IconLine, IconOption} from '../../assets';
+import {Text, StyleSheet, View, Image} from 'react-native';
+import {colors, fonts, getData, responsiveHeight} from '../../utils';
+import {dummyMenu} from '../../data';
+import {DefaultImageProfile, IconLine, IconOption} from '../../assets';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {heightMobileUI} from '../../utils';
 import {Button, ListMenu} from '../../components';
@@ -12,10 +12,36 @@ export default class Profile extends Component {
     super(props);
 
     this.state = {
-      profile: dummyUser,
+      profile: false,
       menus: dummyMenu,
     };
   }
+
+  componentDidMount() {
+    const {navigation} = this.props;
+
+    this._unsubscribe = navigation.addListener('focus', () => {
+      this.getUserData();
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  getUserData = () => {
+    getData('user').then(res => {
+      const data = res;
+
+      if (data) {
+        this.setState({
+          profile: data,
+        });
+      } else {
+        this.props.navigation.replace('Login');
+      }
+    });
+  };
 
   render() {
     const {profile, menus} = this.state;
@@ -31,11 +57,16 @@ export default class Profile extends Component {
           <IconOption />
         </View>
         <View style={styles.container}>
-          <Image source={profile.avatar} style={styles.imageUser} />
+          <Image
+            source={
+              profile.avatar ? {uri: profile.avatar} : DefaultImageProfile
+            }
+            style={styles.imageUser}
+          />
           <View style={styles.sectionProfile}>
             <Text style={styles.namaProfile}>{profile.nama}</Text>
             <View style={styles.contactProfile}>
-              <Text style={styles.contact}>{profile.nomorHp}</Text>
+              <Text style={styles.contact}>{profile.noHp}</Text>
               <IconLine style={styles.line} />
               <Text style={styles.contact}>{profile.email}</Text>
             </View>

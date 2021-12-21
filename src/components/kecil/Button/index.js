@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {IconArrowLeft, IconCart, IconEdit} from '../../../assets';
 import {colors} from '../../../utils';
+import BtnLoading from './BtnLoading';
 import TextIcon from './TextIcon';
 import TextOnly from './TextOnly';
 
@@ -18,7 +19,12 @@ const Button = props => {
     return <IconCart />;
   };
 
-  const {icon, totalCart, padding, type, onPress} = props;
+  const {icon, totalCart, padding, type, onPress, loading} = props;
+
+  // loading
+  if (loading) {
+    return <BtnLoading {...props} />;
+  }
 
   if (type === 'text') {
     return <TextOnly {...props} />;
