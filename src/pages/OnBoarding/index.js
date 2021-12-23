@@ -69,7 +69,7 @@ export default class OnBoarding extends Component {
           renderNextButton={this.renderNextButton}
           renderPrevButton={this.renderPrevButton}
           renderDoneButton={this.renderDoneButton}
-          onDone={() => navigation.navigate('MainApp')}
+          onDone={() => navigation.replace('MainApp')}
           activeDotStyle={styles.dotStyle}
         />
       </View>

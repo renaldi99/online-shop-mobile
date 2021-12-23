@@ -20,6 +20,8 @@ export default class Profile extends Component {
   componentDidMount() {
     const {navigation} = this.props;
 
+    // refresh data when click nav-bottom profile
+    // only page profile can run componentDidMount
     this._unsubscribe = navigation.addListener('focus', () => {
       this.getUserData();
     });

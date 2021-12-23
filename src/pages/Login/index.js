@@ -5,10 +5,47 @@ import {colors, fonts, heightMobileUI, responsiveHeight} from '../../utils';
 import {TextInput} from 'react-native-paper';
 import {Button, Jarak} from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {loginUser} from '../../actions/AuthAction';
+import {connect} from 'react-redux';
+import SweetAlert from 'react-native-sweet-alert';
 
-export default class Login extends Component {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
+  login = () => {
+    const {email, password} = this.state;
+
+    if (email && password) {
+      // action
+      this.props.dispatch(loginUser(email, password));
+    } else {
+      SweetAlert.showAlertWithOptions({
+        title: 'Opps..',
+        subTitle: 'Email and Password cannot be empty',
+        style: 'error',
+        cancellable: true,
+      });
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    const {loginResult} = this.props;
+
+    if (loginResult && prevProps.loginResult !== loginResult) {
+      this.props.navigation.replace('MainApp');
+    }
+  }
+
   render() {
-    const {navigation} = this.props;
+    const {navigation, loginLoading} = this.props;
+    const {email, password} = this.state;
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.wrapperLogo}>
@@ -26,6 +63,8 @@ export default class Login extends Component {
             label="Email"
             placeholder="Input your email"
             right={<TextInput.Affix />}
+            value={email}
+            onChangeText={email => this.setState({email})}
           />
           <Jarak height={10} />
           <TextInput
@@ -34,9 +73,18 @@ export default class Login extends Component {
             placeholder="Input your password"
             secureTextEntry
             right={<TextInput.Affix />}
+            value={password}
+            onChangeText={password => this.setState({password})}
           />
           <Jarak height={20} />
-          <Button type="text" title="Login" padding={15} fontSize={18} />
+          <Button
+            type="text"
+            title="Login"
+            padding={15}
+            fontSize={18}
+            loading={loginLoading}
+            onPress={() => this.login()}
+          />
         </View>
         <View style={styles.sectionRegisterAccount}>
           <Text style={styles.TitleRegisterAccount}>
@@ -52,6 +100,14 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  loginLoading: state.AuthReducer.loginLoading,
+  loginResult: state.AuthReducer.loginResult,
+  loginError: state.AuthReducer.loginError,
+});
+
+export default connect(mapStateToProps, null)(Login);
 
 const styles = StyleSheet.create({
   container: {
