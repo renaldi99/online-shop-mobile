@@ -1,24 +1,48 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator} from 'react-native-paper';
+import {connect} from 'react-redux';
+import {colors} from '../../../utils';
 import {CardProduct} from '../../kecil';
 
-const ListProducts = ({products, navigation}) => {
+const ListProducts = ({
+  getListProductLoading,
+  getListProductResult,
+  getListProductError,
+  navigation,
+}) => {
   return (
     <View style={styles.container}>
-      {products.map(product => {
-        return (
-          <CardProduct
-            product={product}
-            key={product.id}
-            navigation={navigation}
-          />
-        );
-      })}
+      {getListProductResult ? (
+        Object.keys(getListProductResult).map(key => {
+          return (
+            <CardProduct
+              product={getListProductResult[key]}
+              key={key}
+              navigation={navigation}
+            />
+          );
+        })
+      ) : getListProductLoading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator color={colors.grey} />
+        </View>
+      ) : getListProductError ? (
+        <Text>{getListProductError}</Text>
+      ) : (
+        <Text>No Item</Text>
+      )}
     </View>
   );
 };
 
-export default ListProducts;
+const mapStateToProps = state => ({
+  getListProductLoading: state.ProductReducer.getListProductLoading,
+  getListProductResult: state.ProductReducer.getListProductResult,
+  getListProductError: state.ProductReducer.getListProductError,
+});
+
+export default connect(mapStateToProps, null)(ListProducts);
 
 const styles = StyleSheet.create({
   container: {
@@ -26,5 +50,10 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingTop: 20,
+  },
+  loading: {
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });

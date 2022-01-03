@@ -1,19 +1,17 @@
 import FIREBASE from '../config/FIREBASE';
-import {storeData} from '../utils';
+import {
+  dispatchLoading,
+  dispatchSuccess,
+  dispatchError,
+  storeData,
+} from '../utils';
 
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 export const updateProfile = data => {
   return dispatch => {
     // LOADING
-    dispatch({
-      type: UPDATE_PROFILE,
-      payload: {
-        loading: true,
-        data: false,
-        errorMessage: false,
-      },
-    });
+    dispatchLoading(dispatch, UPDATE_PROFILE);
 
     const dataBaru = {
       uid: data.uid,
@@ -32,27 +30,14 @@ export const updateProfile = data => {
       .update(dataBaru)
       .then(res => {
         // SUCCESS
-        dispatch({
-          type: UPDATE_PROFILE,
-          payload: {
-            loading: false,
-            data: res ? res : [],
-            errorMessage: false,
-          },
-        });
+        dispatchSuccess(dispatch, UPDATE_PROFILE, res ? res : []);
 
         // Simpan ke Local Storage (Async)
         storeData('user', dataBaru);
       })
       .catch(error => {
-        dispatch({
-          type: UPDATE_PROFILE,
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: error.message,
-          },
-        });
+        //ERROR
+        dispatchError(dispatch, UPDATE_PROFILE, error.message);
 
         alert(error.message);
       });

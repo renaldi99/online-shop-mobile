@@ -1,5 +1,10 @@
 import FIREBASE from '../config/FIREBASE';
-import {storeData} from '../utils';
+import {
+  dispatchLoading,
+  dispatchSuccess,
+  dispatchError,
+  storeData,
+} from '../utils';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -7,14 +12,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const registerUser = (data, password) => {
   return dispatch => {
     //LOADING
-    dispatch({
-      type: REGISTER_USER,
-      payload: {
-        loading: true,
-        data: false,
-        errorMessage: false,
-      },
-    });
+    dispatchLoading(dispatch, REGISTER_USER);
 
     FIREBASE.auth()
       .createUserWithEmailAndPassword(data.email, password)
@@ -31,28 +29,14 @@ export const registerUser = (data, password) => {
           .set(dataBaru);
 
         // SUCCESS
-        dispatch({
-          type: REGISTER_USER,
-          payload: {
-            loading: false,
-            data: dataBaru,
-            errorMessage: false,
-          },
-        });
+        dispatchSuccess(dispatch, REGISTER_USER, dataBaru);
 
         // Simpan ke Local Storage (Async)
         storeData('user', dataBaru);
       })
       .catch(error => {
         //ERROR
-        dispatch({
-          type: REGISTER_USER,
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: error.message,
-          },
-        });
+        dispatchError(dispatch, REGISTER_USER, error.message);
 
         alert(error.message);
       });
@@ -62,14 +46,7 @@ export const registerUser = (data, password) => {
 export const loginUser = (email, password) => {
   return dispatch => {
     //Loading
-    dispatch({
-      type: LOGIN_USER,
-      payload: {
-        loading: true,
-        data: false,
-        errorMessage: false,
-      },
-    });
+    dispatchLoading(dispatch, LOGIN_USER);
 
     FIREBASE.auth()
       .signInWithEmailAndPassword(email, password)
@@ -81,25 +58,12 @@ export const loginUser = (email, password) => {
           .then(resDB => {
             if (resDB) {
               // SUCCESS
-              dispatch({
-                type: LOGIN_USER,
-                payload: {
-                  loading: false,
-                  data: resDB.val(),
-                  errorMessage: false,
-                },
-              });
+              dispatchSuccess(dispatch, LOGIN_USER, resDB.val());
+
               // Simpan ke Local Storage (Async)
               storeData('user', resDB.val());
             } else {
-              dispatch({
-                type: REGISTER_USER,
-                payload: {
-                  loading: false,
-                  data: false,
-                  errorMessage: 'Data is Empty',
-                },
-              });
+              dispatchError(dispatch, LOGIN_USER, 'Data User is Empty');
 
               alert('Data User is Empty');
             }
@@ -107,14 +71,7 @@ export const loginUser = (email, password) => {
       })
       .catch(error => {
         //ERROR
-        dispatch({
-          type: LOGIN_USER,
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: error.message,
-          },
-        });
+        dispatchError(dispatch, LOGIN_USER, error.message);
 
         alert(error.message);
       });

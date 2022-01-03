@@ -1,16 +1,27 @@
 import React from 'react';
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
+import {getProductByCatalog} from '../../../actions/ProductAction';
 import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
 
-const CardCatalog = ({category}) => {
+const CardCatalog = ({category, navigation, id, dispatch}) => {
+  const productByCatalog = (id, namaKatalog) => {
+    dispatch(getProductByCatalog(id, namaKatalog));
+
+    // navigate ke list product
+    navigation.navigate('ListProduct');
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
-      <Image style={styles.logo} source={category.gambar} />
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => productByCatalog(id, category.namaKatalog)}>
+      <Image style={styles.logo} source={{uri: category.image}} />
     </TouchableOpacity>
   );
 };
 
-export default CardCatalog;
+export default connect()(CardCatalog);
 
 const styles = StyleSheet.create({
   container: {

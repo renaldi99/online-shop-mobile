@@ -9,6 +9,7 @@ import {
 import {
   colors,
   fonts,
+  getData,
   numberWithCommas,
   responsiveHeight,
   responsiveWidth,
@@ -17,6 +18,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {heightMobileUI} from '../../utils';
 import {Button, Inputan, Jarak, Pilihan, ProductSlider} from '../../components';
 import {IconFavorite} from '../../assets';
+import SweetAlert from 'react-native-sweet-alert';
 
 export default class ProductDetail extends Component {
   constructor(props) {
@@ -25,12 +27,51 @@ export default class ProductDetail extends Component {
     this.state = {
       product: this.props.route.params.product,
       images: this.props.route.params.product.gambar,
+      quantity: '',
+      size: '',
+      desc: '',
+      uid: '',
     };
   }
 
+  getInCart = () => {
+    const {quantity, size, desc} = this.state;
+    const {navigation} = this.props;
+
+    getData('user').then(res => {
+      if (res) {
+        this.setState({
+          uid: res.uid,
+        });
+
+        //validasi form
+        if (quantity && size && desc) {
+          //connect to action
+          //this.props.dispatch(putProductToCart(this.state))
+        } else {
+          SweetAlert.showAlertWithOptions({
+            title: 'Opps..',
+            subTitle: 'Please fill form',
+            style: 'error',
+            cancellable: true,
+          });
+        }
+      } else {
+        SweetAlert.showAlertWithOptions({
+          title: 'Opps..',
+          subTitle: 'Please Login',
+          style: 'error',
+          cancellable: true,
+        });
+
+        navigation.replace('Login');
+      }
+    });
+  };
+
   render() {
     const {navigation} = this.props;
-    const {product, images} = this.state;
+    const {product, images, quantity, size, desc} = this.state;
     // console.log('parameter : ', this.props.route.params);
     return (
       <View style={styles.page}>
@@ -66,6 +107,8 @@ export default class ProductDetail extends Component {
                 width={responsiveWidth(170)}
                 height={responsiveHeight(38)}
                 fontSize={RFValue(20, heightMobileUI)}
+                value={quantity}
+                onChangeText={quantity => this.setState({quantity})}
               />
               <Pilihan
                 label="Size :"
@@ -73,6 +116,8 @@ export default class ProductDetail extends Component {
                 height={responsiveHeight(38)}
                 fontSize={RFValue(20, heightMobileUI)}
                 datas={product.ukuran}
+                selectedValue={size}
+                onValueChange={size => this.setState({size})}
               />
             </View>
             <Inputan
@@ -80,6 +125,8 @@ export default class ProductDetail extends Component {
               label="Description"
               fontSize={RFValue(20, heightMobileUI)}
               placeholder="Drop your description here ..."
+              value={desc}
+              onChangeText={desc => this.setState({desc})}
             />
 
             <Jarak height={5} />
@@ -88,7 +135,7 @@ export default class ProductDetail extends Component {
               type="textIcon"
               padding={responsiveHeight(15)}
               fontSize={15}
-              // onPress={() => navigation.navigate('Profile')}
+              onPress={() => this.getInCart()}
             />
           </View>
         </View>

@@ -4,6 +4,7 @@ import {
   API_RAJAONGKIR,
   API_TIMEOUT,
 } from '../utils/constant';
+import {dispatchLoading, dispatchSuccess, dispatchError} from '../utils';
 
 export const GET_PROVINCE = 'GET_PROVINCE';
 export const GET_CITY = 'GET_CITY';
@@ -11,14 +12,7 @@ export const GET_CITY = 'GET_CITY';
 export const getProvinceList = () => {
   return dispatch => {
     //LOADING
-    dispatch({
-      type: GET_PROVINCE,
-      payload: {
-        loading: true,
-        data: false,
-        errorMessage: false,
-      },
-    });
+    dispatchLoading(dispatch, GET_PROVINCE);
 
     axios({
       method: 'get',
@@ -29,36 +23,19 @@ export const getProvinceList = () => {
       .then(res => {
         if (res.status !== 200) {
           //ERROR GET
-          dispatch({
-            type: GET_PROVINCE,
-            payload: {
-              loading: false,
-              data: false,
-              errorMessage: res,
-            },
-          });
+          dispatchError(dispatch, GET_PROVINCE, res);
         } else {
           //SUCCESS GET
-          dispatch({
-            type: GET_PROVINCE,
-            payload: {
-              loading: false,
-              data: res.data ? res.data.rajaongkir.results : [],
-              errorMessage: false,
-            },
-          });
+          dispatchSuccess(
+            dispatch,
+            GET_PROVINCE,
+            res.data ? res.data.rajaongkir.results : [],
+          );
         }
       })
       .catch(err => {
         //ERROR
-        dispatch({
-          type: GET_PROVINCE,
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: err,
-          },
-        });
+        dispatchError(dispatch, GET_PROVINCE, err.message);
 
         alert(err);
       });
@@ -68,14 +45,7 @@ export const getProvinceList = () => {
 export const getCityList = provinsi_id => {
   return dispatch => {
     //LOADING
-    dispatch({
-      type: GET_CITY,
-      payload: {
-        loading: true,
-        data: false,
-        errorMessage: false,
-      },
-    });
+    dispatchLoading(dispatch, GET_CITY);
 
     axios({
       method: 'get',
@@ -86,36 +56,19 @@ export const getCityList = provinsi_id => {
       .then(res => {
         if (res.status !== 200) {
           //ERROR GET
-          dispatch({
-            type: GET_CITY,
-            payload: {
-              loading: false,
-              data: false,
-              errorMessage: res,
-            },
-          });
+          dispatchError(dispatch, GET_CITY, res);
         } else {
           //SUCCESS GET
-          dispatch({
-            type: GET_CITY,
-            payload: {
-              loading: false,
-              data: res.data ? res.data.rajaongkir.results : [],
-              errorMessage: false,
-            },
-          });
+          dispatchSuccess(
+            dispatch,
+            GET_CITY,
+            res.data ? res.data.rajaongkir.results : [],
+          );
         }
       })
       .catch(err => {
         //ERROR
-        dispatch({
-          type: GET_CITY,
-          payload: {
-            loading: false,
-            data: false,
-            errorMessage: err,
-          },
-        });
+        dispatchError(dispatch, GET_CITY, err);
 
         alert(err);
       });
