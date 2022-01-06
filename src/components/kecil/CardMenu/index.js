@@ -13,17 +13,28 @@ import {
 const CardMenu = ({menu, navigation}) => {
   const onSubmit = () => {
     if (menu.halaman === 'Login') {
-      FIREBASE.auth()
-        .signOut()
-        .then(() => {
-          // Sign-out successful.
-          clearStorage();
-          navigation.replace('Login');
-        })
-        .catch(error => {
-          // An error happened.
-          Alert.alert(error);
-        });
+      Alert.alert('Warning', 'Do you want to sign out?', [
+        {
+          text: 'No',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: () =>
+            FIREBASE.auth()
+              .signOut()
+              .then(() => {
+                // Sign-out successful.
+                clearStorage();
+                navigation.replace('Login');
+              })
+              .catch(error => {
+                // An error happened.
+                Alert.alert(error);
+              }),
+        },
+      ]);
     } else {
       navigation.navigate(menu.halaman);
     }

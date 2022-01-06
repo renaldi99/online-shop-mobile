@@ -37,7 +37,7 @@ const Button = props => {
       <Icon />
       {totalCart && (
         <View style={styles.notif}>
-          <Text style={styles.textNotif}>{totalCart}</Text>
+          {/* <Text style={styles.textNotif}></Text> */}
         </View>
       )}
     </TouchableOpacity>

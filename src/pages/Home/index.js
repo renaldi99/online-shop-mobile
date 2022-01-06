@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  BackHandler,
+  Alert,
+} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {BannerSlider, Catalog, ListProducts} from '../../components/besar';
 import HeaderComponent from '../../components/besar/HeaderComponent';
@@ -11,8 +18,27 @@ import {getListCatalog} from '../../actions/CatalogAction';
 import {getSomeProduct} from '../../actions/ProductAction';
 
 class Home extends Component {
+  backHandlerCloseApp = () => {
+    Alert.alert('Warning', 'Do you want to exit?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {
+        text: 'Yes, Close App',
+        onPress: () => BackHandler.exitApp(),
+      },
+    ]);
+    return true;
+  };
+
   componentDidMount() {
     const {navigation} = this.props;
+    this.backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.backHandlerCloseApp,
+    );
     this._unsubscribe = navigation.addListener('focus', () => {
       this.props.dispatch(getListCatalog());
       this.props.dispatch(getSomeProduct());
@@ -20,6 +46,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
+    this.backHandler.remove();
     this._unsubscribe();
   }
 

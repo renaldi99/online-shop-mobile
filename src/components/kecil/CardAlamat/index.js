@@ -3,16 +3,15 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {colors, fonts} from '../../../utils';
 
-const CardAlamat = props => {
-  const {dataUser} = props;
+const CardAlamat = ({alamat, kota, provinsi, navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Address :</Text>
       <Text style={styles.sectionText}>
-        {dataUser.alamat}, Kota {dataUser.kota}
+        {alamat}, {kota}
       </Text>
-      <Text style={styles.sectionText}>Provinsi {dataUser.provinsi}</Text>
-      <TouchableOpacity>
+      <Text style={styles.sectionText}>Provinsi {provinsi}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
         <Text style={styles.sectionAddress}>Edit</Text>
       </TouchableOpacity>
     </View>

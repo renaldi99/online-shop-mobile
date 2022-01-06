@@ -3,6 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Jarak from '../Jarak';
 import {IconDelete} from '../../../assets';
+import {connect} from 'react-redux';
 import {
   colors,
   fonts,
@@ -10,31 +11,41 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from '../../../utils';
+import {deleteCart} from '../../../actions/CartAction';
 
-const CardKeranjang = ({cart}) => {
+const CardKeranjang = ({cart, mainCart, id, dispatch}) => {
+  const deleteCartProduct = () => {
+    dispatch(deleteCart(id, mainCart, cart));
+  };
+
   return (
     <View style={styles.container}>
-      <Image source={cart.product.gambar[0]} style={styles.sectionImage} />
+      <Image
+        source={{uri: cart.product.gambar[0]}}
+        style={styles.sectionImage}
+      />
       <View style={styles.sectionDescription}>
-        <Text style={styles.textTitle}>{cart.product.title}</Text>
+        <Text style={styles.textTitle}>{cart.product.nama}</Text>
         <Text style={styles.textPrice}>
           Rp. {numberWithCommas(cart.product.harga)}
         </Text>
         <Jarak height={20} />
-        <Text style={styles.text}>Order: {cart.jumlahPesan}</Text>
-        <Text style={styles.text}>Size: {cart.ukuran}</Text>
+        <Text style={styles.text}>Order: {cart.totalOrder}</Text>
+        <Text style={styles.text}>Size: {cart.size}</Text>
         <Text style={styles.text}>
-          Total: Rp. {numberWithCommas(cart.totalHarga)}
+          Total: Rp. {numberWithCommas(cart.totalPrice)}
         </Text>
       </View>
-      <TouchableOpacity style={styles.sectionIcon}>
+      <TouchableOpacity
+        style={styles.sectionIcon}
+        onPress={() => deleteCartProduct()}>
         <IconDelete />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default CardKeranjang;
+export default connect()(CardKeranjang);
 
 const styles = StyleSheet.create({
   container: {

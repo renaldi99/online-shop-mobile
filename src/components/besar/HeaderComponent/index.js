@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
-import {colors, fonts, responsiveHeight} from '../../../utils';
+import {colors, fonts, getData, responsiveHeight} from '../../../utils';
 import {IconSearch} from '../../../assets';
 import {Button, Jarak} from '../../kecil';
 import {connect} from 'react-redux';
 import {saveKeyword} from '../../../actions/ProductAction';
+import {getListCart} from '../../../actions/CartAction';
 
 class HeaderComponent extends Component {
   constructor(props) {
@@ -14,6 +15,15 @@ class HeaderComponent extends Component {
       search: '',
     };
   }
+
+  componentDidMount = () => {
+    const {navigation, dispatch} = this.props;
+    getData('user').then(res => {
+      if (res) {
+        dispatch(getListCart(res.uid));
+      }
+    });
+  };
 
   onSearching = () => {
     const {page, navigation, dispatch} = this.props;
@@ -34,8 +44,15 @@ class HeaderComponent extends Component {
   };
 
   render() {
-    const {navigation} = this.props;
+    const {navigation, getListCartResult} = this.props;
     const {search} = this.state;
+
+    let totalCart;
+
+    if (getListCartResult) {
+      totalCart = Object.keys(getListCartResult.orders).length;
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.wrapperHeader}>
@@ -57,7 +74,7 @@ class HeaderComponent extends Component {
             icon="cart"
             padding={10}
             onPress={() => navigation.navigate('Keranjang')}
-            totalCart
+            totalCart={totalCart}
           />
         </View>
       </View>
@@ -65,7 +82,11 @@ class HeaderComponent extends Component {
   }
 }
 
-export default connect()(HeaderComponent);
+const mapStateToProps = state => ({
+  getListCartResult: state.CartReducer.getListCartResult,
+});
+
+export default connect(mapStateToProps, null)(HeaderComponent);
 
 const styles = StyleSheet.create({
   container: {

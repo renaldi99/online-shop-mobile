@@ -9,7 +9,7 @@ import {
 } from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const TextIcon = ({icon, padding, fontSize, title, onPress}) => {
+const TextIcon = ({icon, padding, fontSize, title, onPress, disabled}) => {
   const Icon = () => {
     if (icon === 'cart') {
       return <IconCart />;
@@ -24,7 +24,9 @@ const TextIcon = ({icon, padding, fontSize, title, onPress}) => {
   };
 
   return (
-    <TouchableOpacity style={styles.container(padding)} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container(padding, disabled)}
+      onPress={onPress}>
       <Text style={styles.title(fontSize)}>{title}</Text>
       <Jarak width={20} />
       <Icon />
@@ -35,8 +37,8 @@ const TextIcon = ({icon, padding, fontSize, title, onPress}) => {
 export default TextIcon;
 
 const styles = StyleSheet.create({
-  container: padding => ({
-    backgroundColor: colors.mainColor,
+  container: (padding, disabled) => ({
+    backgroundColor: disabled ? colors.grey : colors.mainColor,
     padding: padding ? padding : 10,
     borderRadius: 5,
     flexDirection: 'row',

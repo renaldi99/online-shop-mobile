@@ -1,28 +1,91 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {connect} from 'react-redux';
+import {getCityDetail} from '../../actions/RajaOngkirAction';
 import {Button, CardAlamat, Jarak, Line, Pilihan} from '../../components';
-import {colors, fonts, numberWithCommas, responsiveHeight} from '../../utils';
-import {dummyOrders, dummyUser} from '../../data';
+import {
+  colors,
+  fonts,
+  getData,
+  numberWithCommas,
+  responsiveHeight,
+} from '../../utils';
 
-export default class Checkout extends Component {
+class Checkout extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      dataUser: dummyUser,
-      carts: dummyOrders[0],
+      dataUser: false,
       ekspedisi: [],
+      totalPrice: this.props.route.params.totalPrice,
+      totalWeight: this.props.route.params.totalWeight,
+      totalItem: this.props.route.params.totalItem,
+      kota: '',
+      provinsi: '',
+      alamat: '',
     };
   }
 
+  getUserData = () => {
+    const {navigation, dispatch} = this.props;
+    getData('user').then(response => {
+      const data = response;
+
+      if (data) {
+        this.setState({
+          dataUser: data,
+          alamat: data.alamat,
+        });
+
+        dispatch(getCityDetail(data.kota));
+      } else {
+        navigation.replace('Login');
+      }
+    });
+  };
+
+  componentDidMount = () => {
+    this.getUserData();
+  };
+
+  componentDidUpdate = prevProps => {
+    const {getCityDetailResult} = this.props;
+
+    if (
+      getCityDetailResult &&
+      prevProps.getCityDetailResult !== getCityDetailResult
+    ) {
+      this.setState({
+        provinsi: getCityDetailResult.province,
+        kota: getCityDetailResult.type + ' ' + getCityDetailResult.city_name,
+      });
+    }
+  };
+
   render() {
-    const {dataUser, carts, ekspedisi} = this.state;
+    const {
+      dataUser,
+      ekspedisi,
+      totalPrice,
+      totalWeight,
+      alamat,
+      kota,
+      provinsi,
+    } = this.state;
+    const {navigation} = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.sectionCheckout}>
           <Text style={styles.sectionAddressTitle}>Shipping Address</Text>
-          <CardAlamat dataUser={dataUser} />
+          <CardAlamat
+            alamat={alamat}
+            kota={kota}
+            provinsi={provinsi}
+            navigation={navigation}
+          />
           <Jarak height={8} />
 
           <Pilihan
@@ -37,15 +100,13 @@ export default class Checkout extends Component {
           <Text style={styles.sectionTitleOrder}>Order Summary</Text>
 
           <View style={styles.sectionDetailOrder}>
+            <Text style={styles.sectionTextOrder}>Items *set totalnya</Text>
             <Text style={styles.sectionTextOrder}>
-              Items ({carts.orders.length})
-            </Text>
-            <Text style={styles.sectionTextOrder}>
-              Rp. {numberWithCommas(carts.totalHarga)}
+              Rp. {numberWithCommas(totalPrice)}
             </Text>
           </View>
           <View style={styles.sectionDetailOrder}>
-            <Text style={styles.sectionTextOrder}>Weight ({carts.berat})</Text>
+            <Text style={styles.sectionTextOrder}>Weight {totalWeight}</Text>
             <Text style={styles.sectionTextOrder}>
               Rp. {numberWithCommas(15000)}
             </Text>
@@ -60,7 +121,7 @@ export default class Checkout extends Component {
           <View style={styles.sectionTotal}>
             <Text style={styles.sectionText}>Total Pay</Text>
             <Text style={styles.sectionTotalHarga}>
-              Rp : {numberWithCommas(carts.totalHarga + 15000)}
+              Rp : {numberWithCommas(totalPrice + 15000)}
             </Text>
           </View>
 
@@ -77,6 +138,14 @@ export default class Checkout extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  getCityDetailLoading: state.RajaOngkirReducer.getCityDetailLoading,
+  getCityDetailResult: state.RajaOngkirReducer.getCityDetailResult,
+  getCityDetailError: state.RajaOngkirReducer.getCityDetailError,
+});
+
+export default connect(mapStateToProps, null)(Checkout);
 
 const styles = StyleSheet.create({
   container: {

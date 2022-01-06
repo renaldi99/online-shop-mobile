@@ -15,7 +15,6 @@ const Catalog = ({
     <View style={styles.container}>
       {getListCatalogResult ? (
         Object.keys(getListCatalogResult).map(key => {
-          navigation;
           return (
             <CardCatalog
               navigation={navigation}

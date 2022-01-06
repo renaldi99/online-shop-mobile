@@ -8,6 +8,7 @@ import {dispatchLoading, dispatchSuccess, dispatchError} from '../utils';
 
 export const GET_PROVINCE = 'GET_PROVINCE';
 export const GET_CITY = 'GET_CITY';
+export const GET_CITY_DETAIL = 'GET_CITY_DETAIL';
 
 export const getProvinceList = () => {
   return dispatch => {
@@ -69,6 +70,39 @@ export const getCityList = provinsi_id => {
       .catch(err => {
         //ERROR
         dispatchError(dispatch, GET_CITY, err);
+
+        alert(err);
+      });
+  };
+};
+
+export const getCityDetail = city_id => {
+  return dispatch => {
+    //LOADING
+    dispatchLoading(dispatch, GET_CITY_DETAIL);
+
+    axios({
+      method: 'get',
+      url: API_RAJAONGKIR + `city?id=${city_id}`,
+      timeout: API_TIMEOUT,
+      headers: API_HEADER_RAJAONGKIR,
+    })
+      .then(res => {
+        if (res.status !== 200) {
+          //ERROR GET
+          dispatchError(dispatch, GET_CITY_DETAIL, res);
+        } else {
+          //SUCCESS GET
+          dispatchSuccess(
+            dispatch,
+            GET_CITY_DETAIL,
+            res.data ? res.data.rajaongkir.results : [],
+          );
+        }
+      })
+      .catch(err => {
+        //ERROR
+        dispatchError(dispatch, GET_CITY_DETAIL, err);
 
         alert(err);
       });

@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {
   colors,
@@ -19,8 +20,10 @@ import {heightMobileUI} from '../../utils';
 import {Button, Inputan, Jarak, Pilihan, ProductSlider} from '../../components';
 import {IconFavorite} from '../../assets';
 import SweetAlert from 'react-native-sweet-alert';
+import {getInCart} from '../../actions/CartAction';
+import {connect} from 'react-redux';
 
-export default class ProductDetail extends Component {
+class ProductDetail extends Component {
   constructor(props) {
     super(props);
 
@@ -47,7 +50,7 @@ export default class ProductDetail extends Component {
         //validasi form
         if (quantity && size && desc) {
           //connect to action
-          //this.props.dispatch(putProductToCart(this.state))
+          this.props.dispatch(getInCart(this.state));
         } else {
           SweetAlert.showAlertWithOptions({
             title: 'Opps..',
@@ -69,8 +72,16 @@ export default class ProductDetail extends Component {
     });
   };
 
+  componentDidUpdate(prevProps) {
+    const {saveCartResult} = this.props;
+
+    if (saveCartResult && prevProps.saveCartResult !== saveCartResult) {
+      this.props.navigation.replace('Keranjang');
+    }
+  }
+
   render() {
-    const {navigation} = this.props;
+    const {navigation, saveCartLoading} = this.props;
     const {product, images, quantity, size, desc} = this.state;
     // console.log('parameter : ', this.props.route.params);
     return (
@@ -136,6 +147,7 @@ export default class ProductDetail extends Component {
               padding={responsiveHeight(15)}
               fontSize={15}
               onPress={() => this.getInCart()}
+              loading={saveCartLoading}
             />
           </View>
         </View>
@@ -143,6 +155,14 @@ export default class ProductDetail extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  saveCartLoading: state.CartReducer.saveCartLoading,
+  saveCartResult: state.CartReducer.saveCartResult,
+  saveCartError: state.CartReducer.saveCartError,
+});
+
+export default connect(mapStateToProps, null)(ProductDetail);
 
 const styles = StyleSheet.create({
   page: {
