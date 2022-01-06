@@ -4,6 +4,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getCityDetail} from '../../actions/RajaOngkirAction';
 import {Button, CardAlamat, Jarak, Line, Pilihan} from '../../components';
+import {couriers} from '../../data';
 import {
   colors,
   fonts,
@@ -18,7 +19,10 @@ class Checkout extends Component {
 
     this.state = {
       dataUser: false,
-      ekspedisi: [],
+      ekspedisi: couriers,
+      ekspedisiSelected: false,
+      ongkir: 0,
+      estimasi: '',
       totalPrice: this.props.route.params.totalPrice,
       totalWeight: this.props.route.params.totalWeight,
       totalItem: this.props.route.params.totalItem,
@@ -64,10 +68,21 @@ class Checkout extends Component {
     }
   };
 
+  changeEkpedisi = ekspedisiSelected => {
+    if (ekspedisiSelected) {
+      this.setState({
+        ekspedisiSelected: ekspedisiSelected,
+      });
+    }
+
+    // this.props.dispatch(postOngkir(this.state, ekspedisiSelected));
+  };
+
   render() {
     const {
       dataUser,
       ekspedisi,
+      ekspedisiSelected,
       totalPrice,
       totalWeight,
       alamat,
@@ -90,9 +105,13 @@ class Checkout extends Component {
 
           <Pilihan
             datas={ekspedisi}
-            label="Choose Courier :"
+            label="Courier"
             fontSize={RFValue(18)}
             height={48}
+            selectedValue={ekspedisiSelected}
+            onValueChange={ekspedisiSelected =>
+              this.changeEkpedisi(ekspedisiSelected)
+            }
           />
 
           <Jarak height={18} />
