@@ -4,5 +4,6 @@ import Slider1 from './banner1.png';
 import Slider2 from './banner2.png';
 import Profile from './profile.png';
 import DefaultImageProfile from './default-profile.jpg';
+import EmptyBox from './empty-box.svg';
 
-export {Logo, Man, Slider1, Slider2, Profile, DefaultImageProfile};
+export {Logo, Man, Slider1, Slider2, Profile, DefaultImageProfile, EmptyBox};

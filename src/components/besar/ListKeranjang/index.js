@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ActivityIndicator} from 'react-native-paper';
+import {EmptyBox} from '../../../assets';
 import {colors} from '../../../utils';
 import {CardKeranjang} from '../../kecil';
 
@@ -30,7 +31,7 @@ const ListKeranjang = ({
         ) : getListCartError ? (
           <Text>{getListCartError}</Text>
         ) : (
-          <Text>Data Empty</Text>
+          <EmptyBox />
         )}
       </View>
     </ScrollView>

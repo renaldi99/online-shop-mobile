@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
-import {getCityDetail} from '../../actions/RajaOngkirAction';
+import {getCityDetail, postOngkir} from '../../actions/RajaOngkirAction';
 import {Button, CardAlamat, Jarak, Line, Pilihan} from '../../components';
 import {couriers} from '../../data';
 import {
@@ -55,7 +55,7 @@ class Checkout extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    const {getCityDetailResult} = this.props;
+    const {getCityDetailResult, ongkirResult} = this.props;
 
     if (
       getCityDetailResult &&
@@ -64,6 +64,13 @@ class Checkout extends Component {
       this.setState({
         provinsi: getCityDetailResult.province,
         kota: getCityDetailResult.type + ' ' + getCityDetailResult.city_name,
+      });
+    }
+
+    if (ongkirResult && prevProps.ongkirResult !== ongkirResult) {
+      this.setState({
+        ongkir: ongkirResult.cost[0].value,
+        estimasi: ongkirResult.cost[0].etd,
       });
     }
   };
@@ -75,7 +82,7 @@ class Checkout extends Component {
       });
     }
 
-    // this.props.dispatch(postOngkir(this.state, ekspedisiSelected));
+    this.props.dispatch(postOngkir(this.state, ekspedisiSelected));
   };
 
   render() {
@@ -83,6 +90,8 @@ class Checkout extends Component {
       dataUser,
       ekspedisi,
       ekspedisiSelected,
+      estimasi,
+      ongkir,
       totalPrice,
       totalWeight,
       alamat,
@@ -119,7 +128,7 @@ class Checkout extends Component {
           <Text style={styles.sectionTitleOrder}>Order Summary</Text>
 
           <View style={styles.sectionDetailOrder}>
-            <Text style={styles.sectionTextOrder}>Items *set totalnya</Text>
+            <Text style={styles.sectionTextOrder}>Items </Text>
             <Text style={styles.sectionTextOrder}>
               Rp. {numberWithCommas(totalPrice)}
             </Text>
@@ -127,12 +136,12 @@ class Checkout extends Component {
           <View style={styles.sectionDetailOrder}>
             <Text style={styles.sectionTextOrder}>Weight {totalWeight}</Text>
             <Text style={styles.sectionTextOrder}>
-              Rp. {numberWithCommas(15000)}
+              Rp. {numberWithCommas(ongkir)}
             </Text>
           </View>
           <View style={styles.sectionDetailOrder}>
             <Text style={styles.sectionTextOrder}>estimated time</Text>
-            <Text style={styles.sectionTextOrder}>2-3 Days</Text>
+            <Text style={styles.sectionTextOrder}>{estimasi} Days</Text>
           </View>
         </View>
 
@@ -140,7 +149,7 @@ class Checkout extends Component {
           <View style={styles.sectionTotal}>
             <Text style={styles.sectionText}>Total Pay</Text>
             <Text style={styles.sectionTotalHarga}>
-              Rp : {numberWithCommas(totalPrice + 15000)}
+              Rp : {numberWithCommas(totalPrice + ongkir)}
             </Text>
           </View>
 
@@ -162,6 +171,8 @@ const mapStateToProps = state => ({
   getCityDetailLoading: state.RajaOngkirReducer.getCityDetailLoading,
   getCityDetailResult: state.RajaOngkirReducer.getCityDetailResult,
   getCityDetailError: state.RajaOngkirReducer.getCityDetailError,
+
+  ongkirResult: state.RajaOngkirReducer.ongkirResult,
 });
 
 export default connect(mapStateToProps, null)(Checkout);

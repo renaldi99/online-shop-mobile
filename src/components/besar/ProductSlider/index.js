@@ -19,10 +19,10 @@ export default class ProductSlider extends Component {
       openImage: true,
       previewImage: [
         {
-          url: '',
+          url: this.props.images[index],
           props: {
             // Or you can set source directory.
-            source: this.props.images[index],
+            // source: this.props.images[index],
           },
         },
       ],

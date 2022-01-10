@@ -2,6 +2,7 @@ import {
   GET_PROVINCE,
   GET_CITY,
   GET_CITY_DETAIL,
+  POST_ONGKIR,
 } from '../../actions/RajaOngkirAction';
 
 const initialState = {
@@ -16,6 +17,10 @@ const initialState = {
   getCityDetailLoading: false,
   getCityDetailResult: false,
   getCityDetailError: false,
+
+  ongkirLoading: false,
+  ongkirResult: false,
+  ongkirError: false,
 };
 
 export default function (state = initialState, action) {
@@ -40,6 +45,13 @@ export default function (state = initialState, action) {
         getCityDetailLoading: action.payload.loading,
         getCityDetailResult: action.payload.data,
         getCityDetailError: action.payload.errorMessage,
+      };
+    case POST_ONGKIR:
+      return {
+        ...state,
+        ongkirLoading: action.payload.loading,
+        ongkirResult: action.payload.data,
+        ongkirError: action.payload.errorMessage,
       };
     default:
       return state;
