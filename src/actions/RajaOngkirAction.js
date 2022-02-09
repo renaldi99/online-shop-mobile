@@ -145,6 +145,8 @@ export const postOngkir = (data, eskpedisi) => {
               return filterOngkir;
             });
 
+          console.log(ongkirs);
+
           dispatchSuccess(dispatch, POST_ONGKIR, ongkirSelected[0]);
         }
       })
