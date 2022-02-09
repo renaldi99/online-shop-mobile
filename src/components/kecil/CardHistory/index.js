@@ -11,16 +11,17 @@ import {
   responsiveWidth,
 } from '../../../utils';
 
-const CardHistory = ({order}) => {
+const CardHistory = ({order, navigation, id}) => {
   // console.log('ini dia: ', order.orders[0].product.nama.length);
+  const orders = order.orders;
 
   return (
     <View style={styles.containerCard}>
       <View style={styles.sectionHeader}>
-        <Text style={styles.formatDate}>{order.tanggalPemesanan}</Text>
+        <Text style={styles.formatDate}>{order.date}</Text>
         <View style={styles.sectionInfoStatus}>
           <View style={styles.buttonFinished}>
-            <Text style={styles.textFinished}>Finished</Text>
+            <Text style={styles.textFinished}>{order.status}</Text>
           </View>
           <TouchableOpacity>
             <IconOption />
@@ -28,21 +29,23 @@ const CardHistory = ({order}) => {
         </View>
       </View>
 
-      {order.orders.map((item, index) => {
+      {Object.keys(orders).map((key, index) => {
         return (
           <View key={index} style={styles.sectionListOrder}>
             <Image
-              source={item.product.gambar[0]}
+              source={{uri: orders[key].product.gambar[0]}}
               style={styles.sectionImageOrder}
             />
             <View style={styles.sectionDescriptionOrder}>
               <Text style={styles.sectionDescriptionTitle}>
-                {item.product.nama.length > 25
-                  ? item.product.nama.substring(0, 28) + '...'
-                  : item.product.nama}
+                {orders[key].product.nama.length > 25
+                  ? orders[key].product.nama.substring(0, 28) + '...'
+                  : orders[key].product.nama}
               </Text>
-              <Text>Order: {item.jumlahPesan}</Text>
-              <Text>Total Order: Rp. {numberWithCommas(item.totalHarga)}</Text>
+              <Text>Order: {orders[key].totalOrder}</Text>
+              <Text>
+                Total Order: Rp. {numberWithCommas(orders[key].totalPrice)}
+              </Text>
             </View>
           </View>
         );
@@ -54,7 +57,7 @@ const CardHistory = ({order}) => {
         <View>
           <Text style={styles.sectionTotalText}>Total Amount:</Text>
           <Text style={styles.sectionTotalAmount}>
-            Rp. {numberWithCommas(order.totalHarga + 15000)}
+            Rp. {numberWithCommas(order.totalPrice)}
           </Text>
         </View>
 

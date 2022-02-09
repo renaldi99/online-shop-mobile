@@ -84,6 +84,7 @@ class ProductDetail extends Component {
     const {navigation, saveCartLoading} = this.props;
     const {product, images, quantity, size, desc} = this.state;
     // console.log('parameter : ', this.props.route.params);
+
     return (
       <View style={styles.page}>
         <View style={styles.navItem}>

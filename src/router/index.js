@@ -16,6 +16,7 @@ import {
   Login,
   Register1,
   Register2,
+  Midtrans,
 } from '../pages';
 import {BottomNavigator} from '../components';
 
@@ -117,6 +118,11 @@ const Router = () => {
         name="Register2"
         component={Register2}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Midtrans"
+        component={Midtrans}
+        options={{title: 'Continue Payment', headerTitleAlign: 'center'}}
       />
     </Stack.Navigator>
   );

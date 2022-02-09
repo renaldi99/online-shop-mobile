@@ -73,7 +73,6 @@ export const getCityList = provinsi_id => {
       .catch(err => {
         //ERROR
         dispatchError(dispatch, GET_CITY, err);
-
         alert(err);
       });
   };

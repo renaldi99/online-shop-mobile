@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+import SweetAlert from 'react-native-sweet-alert';
 import {connect} from 'react-redux';
+import {snapTransaction} from '../../actions/PaymentAction';
 import {getCityDetail, postOngkir} from '../../actions/RajaOngkirAction';
 import {Button, CardAlamat, Jarak, Line, Pilihan} from '../../components';
 import {couriers} from '../../data';
@@ -25,7 +27,8 @@ class Checkout extends Component {
       estimasi: '',
       totalPrice: this.props.route.params.totalPrice,
       totalWeight: this.props.route.params.totalWeight,
-      totalItem: this.props.route.params.totalItem,
+      // get data alamat secara dinamis melalui value / id dari api raja ongkir saat register (postman)
+      // dinamis
       kota: '',
       provinsi: '',
       alamat: '',
@@ -55,7 +58,8 @@ class Checkout extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    const {getCityDetailResult, ongkirResult} = this.props;
+    const {getCityDetailResult, ongkirResult, snapTransactionResult} =
+      this.props;
 
     if (
       getCityDetailResult &&
@@ -73,6 +77,23 @@ class Checkout extends Component {
         estimasi: ongkirResult.cost[0].etd,
       });
     }
+
+    if (
+      snapTransactionResult &&
+      prevProps.snapTransactionResult !== snapTransactionResult
+    ) {
+      const {dataUser, ongkir, estimasi} = this.state;
+      // checkout success and redirect to web view
+      // (parameter) sent to Midtrans Page to change cart to be history
+      const parameter = {
+        redirect_url: snapTransactionResult.redirect_url,
+        ongkir: ongkir,
+        estimasi: estimasi,
+        order_id: 'TEST - ' + new Date().getTime() + '-' + dataUser.uid,
+      };
+
+      this.props.navigation.navigate('Midtrans', parameter);
+    }
   };
 
   changeEkpedisi = ekspedisiSelected => {
@@ -81,8 +102,41 @@ class Checkout extends Component {
         ekspedisiSelected: ekspedisiSelected,
       });
     }
-
+    // console.log('Log : ', ekspedisiSelected.service);
     this.props.dispatch(postOngkir(this.state, ekspedisiSelected));
+  };
+
+  // submit -> checkout midtrans
+  bayarCheckout = () => {
+    const {totalPrice, ongkir, dataUser, alamat} = this.state;
+    const {dispatch} = this.props;
+    const data = {
+      transaction_details: {
+        order_id: 'TEST - ' + new Date().getTime() + '-' + dataUser.uid,
+        gross_amount: totalPrice + ongkir,
+      },
+      credit_card: {
+        secure: true,
+      },
+      customer_details: {
+        first_name: dataUser.nama,
+        email: dataUser.email,
+        phone: dataUser.noHp,
+        address: alamat,
+      },
+    };
+
+    if (ongkir !== 0) {
+      // action
+      dispatch(snapTransaction(data));
+    } else {
+      SweetAlert.showAlertWithOptions({
+        title: 'Opps..',
+        subTitle: 'Select your shipping method',
+        style: 'error',
+        cancellable: true,
+      });
+    }
   };
 
   render() {
@@ -98,7 +152,7 @@ class Checkout extends Component {
       kota,
       provinsi,
     } = this.state;
-    const {navigation} = this.props;
+    const {navigation, snapTransactionLoading} = this.props;
 
     return (
       <View style={styles.container}>
@@ -154,12 +208,13 @@ class Checkout extends Component {
           </View>
 
           <Button
+            loading={snapTransactionLoading}
             icon=""
             type="textIcon"
             title="Process Payment"
             padding={responsiveHeight(20)}
             fontSize={18}
-            // onPress={() => navigation.navigate('Checkout')}
+            onPress={() => this.bayarCheckout()}
           />
         </View>
       </View>
@@ -173,6 +228,9 @@ const mapStateToProps = state => ({
   getCityDetailError: state.RajaOngkirReducer.getCityDetailError,
 
   ongkirResult: state.RajaOngkirReducer.ongkirResult,
+
+  snapTransactionResult: state.PaymentReducer.snapTransactionResult,
+  snapTransactionLoading: state.PaymentReducer.snapTransactionLoading,
 });
 
 export default connect(mapStateToProps, null)(Checkout);

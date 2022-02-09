@@ -81,7 +81,7 @@ export const getInCartDetail = data => {
     FIREBASE.database()
       .ref('carts/' + data.uid)
       .child('orders')
-      .push(orders)
+      .push(orders) // didalam firabase setelah orders akan dibuat string random untuk idnya/penanda karna objek orders tidak ada idnya, baru data akan di push ke dalam orders
       .then(response => {
         dispatchSuccess(dispatch, GET_IN_CART, response ? response : []);
       })

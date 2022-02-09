@@ -41,6 +41,7 @@ class Keranjang extends Component {
 
   render() {
     const {navigation, getListCartResult} = this.props;
+
     return (
       <View style={styles.container}>
         <ListKeranjang {...this.props} />

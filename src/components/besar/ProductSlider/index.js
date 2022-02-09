@@ -22,7 +22,7 @@ export default class ProductSlider extends Component {
           url: this.props.images[index],
           props: {
             // Or you can set source directory.
-            // source: this.props.images[index],
+            source: this.props.images[index],
           },
         },
       ],
@@ -46,7 +46,14 @@ export default class ProductSlider extends Component {
           onCurrentImagePressed={index => this.clickPreview(index)}
         />
 
-        <Modal visible={openImage} transparent={true}>
+        <Modal
+          visible={openImage}
+          transparent={true}
+          onRequestClose={() =>
+            this.setState({
+              openImage: false,
+            })
+          }>
           <ImageViewer
             imageUrls={previewImage}
             backgroundColor={colors.pink}

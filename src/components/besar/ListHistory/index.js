@@ -1,24 +1,55 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View, Text} from 'react-native';
 import {CardHistory} from '../../kecil';
+import {EmptyBox} from '../../../assets';
+import {ActivityIndicator} from 'react-native-paper';
+import {colors} from '../../../utils';
+import {connect} from 'react-redux';
 
-const ListHistory = ({orders}) => {
+const ListHistory = ({
+  navigation,
+  getListHistoryLoading,
+  getListHistoryResult,
+  getListHistoryError,
+}) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {orders.map(order => {
-          return <CardHistory order={order} key={order.id} />;
-        })}
+        {getListHistoryResult ? (
+          Object.keys(getListHistoryResult).map(key => {
+            return (
+              <CardHistory
+                navigation={navigation}
+                order={getListHistoryResult[key]}
+                key={key}
+                id={key}
+              />
+            );
+          })
+        ) : getListHistoryLoading ? (
+          <View style={styles.loading}>
+            <ActivityIndicator color={colors.grey} />
+          </View>
+        ) : getListHistoryError ? (
+          <Text>{getListHistoryError}</Text>
+        ) : (
+          <EmptyBox />
+        )}
       </View>
     </ScrollView>
   );
 };
 
-export default ListHistory;
+export default connect()(ListHistory);
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
     paddingVertical: 18,
+  },
+  loading: {
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
