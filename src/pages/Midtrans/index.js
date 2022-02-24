@@ -11,7 +11,17 @@ export class Midtrans extends Component {
     if (this.props.route.params.order_id) {
       const {dispatch} = this.props;
 
+      //this.props.route.params data (parameter) yang dilempar dari checkout cek componentdidupdate
+
       dispatch(updateOrder(this.props.route.params));
+    }
+  };
+
+  onMessage = data => {
+    // menerima data dari webview page web admin reactjs / onMessage
+    // menghubungkan interaksi dengan web dan mobile / reactjs & reactnative
+    if (data.nativeEvent.data === 'Finish') {
+      this.props.navigation.replace('History');
     }
   };
 
@@ -24,7 +34,10 @@ export class Midtrans extends Component {
             <ActivityIndicator size="large" color={colors.mainColor} />
           </View>
         ) : (
-          <WebView source={{uri: this.props.route.params.redirect_url}} />
+          <WebView
+            source={{uri: this.props.route.params.redirect_url}}
+            onMessage={this.onMessage}
+          />
         )}
       </>
     );

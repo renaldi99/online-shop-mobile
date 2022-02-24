@@ -11,7 +11,8 @@ export const getListHistory = uid => {
       .ref('histories')
       .orderByChild('user')
       .equalTo(uid)
-      .once('value', querySnapshot => {
+      .once('value')
+      .then(querySnapshot => {
         const data = querySnapshot.val();
         dispatchSuccess(dispatch, GET_LIST_HISTORY, data);
       })

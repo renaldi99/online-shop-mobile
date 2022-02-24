@@ -9,7 +9,7 @@ export const updateOrder = params => {
   return dispatch => {
     dispatchLoading(dispatch, UPDATE_ORDER);
 
-    // GET UID User
+    // GET UID User / menghilangkan -
     const uid = params.order_id.split('-')[2];
 
     // UID for get cart by UID user

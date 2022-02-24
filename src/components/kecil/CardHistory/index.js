@@ -13,6 +13,7 @@ import {
 
 const CardHistory = ({order, navigation, id}) => {
   // console.log('ini dia: ', order.orders[0].product.nama.length);
+  // karena didalam orders ada string / key jadi dipecah untuk digunakan Object.keys
   const orders = order.orders;
 
   return (

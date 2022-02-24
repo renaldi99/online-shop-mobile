@@ -110,6 +110,7 @@ class Checkout extends Component {
   bayarCheckout = () => {
     const {totalPrice, ongkir, dataUser, alamat} = this.state;
     const {dispatch} = this.props;
+    // di kirim ke midtrans
     const data = {
       transaction_details: {
         order_id: 'TEST - ' + new Date().getTime() + '-' + dataUser.uid,

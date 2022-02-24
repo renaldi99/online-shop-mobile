@@ -145,7 +145,8 @@ export const postOngkir = (data, eskpedisi) => {
               return filterOngkir;
             });
 
-          console.log(ongkirs);
+          // dipake [0] karena arraynya 1 element / masih ada array
+          // console.log('data ongkirs : ', ongkirSelected);
 
           dispatchSuccess(dispatch, POST_ONGKIR, ongkirSelected[0]);
         }

@@ -14,7 +14,7 @@ export default class Splash extends Component {
   render() {
     return (
       <View style={styles.pages}>
-        <Logo />
+        <Logo width={200} />
         <Text style={styles.textSplash}>Change your style with us</Text>
         <Man
           style={{position: 'absolute', opacity: 0.5, left: -70, bottom: 0}}
