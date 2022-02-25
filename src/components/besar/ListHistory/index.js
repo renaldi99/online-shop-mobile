@@ -13,7 +13,7 @@ const ListHistory = ({
   getListHistoryError,
 }) => {
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         {getListHistoryResult ? (
           Object.keys(getListHistoryResult).map(key => {

@@ -1,9 +1,13 @@
-import {GET_LIST_HISTORY} from '../../actions/HistoryAction';
+import {GET_LIST_HISTORY, UPDATE_STATUS} from '../../actions/HistoryAction';
 
 const initialState = {
   getListHistoryLoading: false,
   getListHistoryResult: false,
   getListHistoryError: false,
+
+  updateStatusLoading: false,
+  updateStatusResult: false,
+  updateStatusError: false,
 };
 
 export default function (state = initialState, action) {
@@ -14,6 +18,13 @@ export default function (state = initialState, action) {
         getListHistoryLoading: action.payload.loading,
         getListHistoryResult: action.payload.data,
         getListHistoryError: action.payload.errorMessage,
+      };
+    case UPDATE_STATUS:
+      return {
+        ...state,
+        updateStatusLoading: action.payload.loading,
+        updateStatusResult: action.payload.data,
+        updateStatusError: action.payload.errorMessage,
       };
     default:
       return state;
